@@ -1,0 +1,28 @@
+name: Seasoning-E-Commerce
+fileGroups:
+  - configs
+configFiles:
+  Debug: configs/Debug.xcconfig
+  Release: configs/Release.xcconfig
+targets:
+  Seasoning-E-Commerce:
+    type: application
+    platform: iOS
+    sources: Seasoning-E-Commerce
+    configFiles:
+      Debug: configs/Seasoning-E-Commerce.xcconfig
+      Release: configs/Seasoning-E-Commerce.xcconfig
+    settings:
+      CURRENT_PROJECT_VERSION: 1
+    scheme:
+      testTargets:
+        - Seasoning-E-CommerceTests
+  Seasoning-E-CommerceTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: Seasoning-E-CommerceTests
+    configFiles:
+      Debug: configs/Seasoning-E-CommerceTests-Debug.xcconfig
+      Release: configs/Seasoning-E-CommerceTests-Release.xcconfig
+    dependencies:
+      - target: Seasoning-E-Commerce
