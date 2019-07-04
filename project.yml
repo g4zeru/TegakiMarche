@@ -8,7 +8,8 @@ targets:
   Seasoning-E-Commerce:
     type: application
     platform: iOS
-    deploymentTarget: 10.0
+    deploymentTarget: "11.4"
+    xcodeVersion: "10.00"
     sources: Seasoning-E-Commerce
     configFiles:
       Debug: configs/Seasoning-E-Commerce.xcconfig
