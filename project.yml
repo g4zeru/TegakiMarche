@@ -8,14 +8,14 @@ targets:
   Seasoning-E-Commerce:
     type: application
     platform: iOS
-    deploymentTarget: "11.4"
-    xcodeVersion: "10.00"
     sources: Seasoning-E-Commerce
-    configFiles:
-      Debug: configs/Seasoning-E-Commerce.xcconfig
-      Release: configs/Seasoning-E-Commerce.xcconfig
     settings:
-      CURRENT_PROJECT_VERSION: 1
+      CURRENT_PROJECT_VERSION: "1"
+      INFOPLIST_FILE: Seasoning-E-Commerce/info.plist
+      PRODUCT_BUNDLE_IDENTIFIER: com.g4zeru.Seasoning-E-Commerce
+      DEVELOPMENT_TEAM: 8446Z6F5D6
+      SWIFT_VERSION: "5.0"
+      IPHONEOS_DEPLOYMENT_TARGET: "12.0"
     scheme:
       testTargets:
         - Seasoning-E-CommerceTests
@@ -23,8 +23,5 @@ targets:
     type: bundle.unit-test
     platform: iOS
     sources: Seasoning-E-CommerceTests
-    configFiles:
-      Debug: configs/Seasoning-E-CommerceTests-Debug.xcconfig
-      Release: configs/Seasoning-E-CommerceTests-Release.xcconfig
     dependencies:
       - target: Seasoning-E-Commerce
