@@ -1,6 +1,6 @@
 ---
 name: Feature
-about: 
+about: やりたいことの追加、特に制限なし
 
 ---
 ## やりたいこと
