@@ -1,0 +1,27 @@
+name: FirebaseConnector
+fileGroups:
+ - configs
+configFiles:
+  Debug: configs/Debug.xcconfig
+  Release: configs/Release.xcconfig
+targets:
+  FirebaseConnector:
+    type: framework
+    platform: iOS
+    sources: FirebaseConnector
+    settings:
+      CURRENT_PROJECT_VERSION: "1"
+      INFOPLIST_FILE: FirebaseConnector/info.plist
+      PRODUCT_BUNDLE_IDENTIFIER: com.g4zeru.FirebaseConnector
+      DEVELOPMENT_TEAM: 8446Z6F5D6
+      SWIFT_VERSION: "5.0"
+      IPHONEOS_DEPLOYMENT_TARGET: "12.0"
+    scheme:
+      testTargets:
+       - FirebaseConnector
+  FirebaseConnectorTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: FirebaseConnectorTests
+    dependencies:
+      - target: FirebaseConnector

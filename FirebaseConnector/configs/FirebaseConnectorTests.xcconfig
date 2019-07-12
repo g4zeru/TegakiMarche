@@ -1,0 +1,6 @@
+// Generated using xcconfig-extractor 0.5.0 by Toshihiro Suzuki - https://github.com/toshi0383/xcconfig-extractor
+INFOPLIST_FILE = FirebaseConnectorTests/Info.plist
+PRODUCT_NAME = $(TARGET_NAME)
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+PRODUCT_BUNDLE_IDENTIFIER = com.g4zeru.FirebaseConnectorTests
+
