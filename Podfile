@@ -11,6 +11,7 @@ target 'Seasoning-E-Commerce' do
   pod 'SnapKit', '~>5'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Analytics'
 
 
   target 'Seasoning-E-CommerceTests' do
