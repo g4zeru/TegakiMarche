@@ -121,6 +121,14 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="332" height="456"/>
+            <connections>
+                <outlet property="likeButton" destination="YsB-Wd-SAo" id="Gbh-ph-tSm"/>
+                <outlet property="purchaseButton" destination="syM-6A-mYJ" id="Yz9-bU-Gk3"/>
+                <outlet property="shareButton" destination="RrZ-Ph-WN8" id="NuV-qy-EaR"/>
+                <outlet property="subTitleLabel" destination="UAr-kV-OOS" id="qWH-Oy-UPF"/>
+                <outlet property="thumbnailImageView" destination="CM2-HF-k2c" id="HWg-Tg-KwP"/>
+                <outlet property="titleLabel" destination="2CT-md-KOL" id="OPN-jf-xkP"/>
+            </connections>
             <point key="canvasLocation" x="239.13043478260872" y="105.80357142857143"/>
         </collectionViewCell>
     </objects>
