@@ -8,16 +8,24 @@
 import UIKit
 
 class HotRankingCell: UICollectionViewCell {
-    @IBOutlet weak var overlayView: UIView!
-    @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet private weak var overlayView: UIView!
+    @IBOutlet private weak var thumbnailImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
+    @IBOutlet private weak var likeButton: UIButton!
+    
+    class var cellHeightRatio: CGFloat {
+        return 222/166
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        overlayView.layer.shadowOpacity = 0.8
-        overlayView.layer.shadowRadius = 6
-        overlayView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        self.layer.masksToBounds = false
+        self.layer.shadowOffset = CGSize(width: 2, height: 3)
+        self.layer.shadowRadius = 3
+        self.layer.shadowOpacity = 0.5
+        overlayView.layer.masksToBounds = true
+        overlayView.layer.cornerRadius = 10
     }
     
     func update(title: String, price: Int) {

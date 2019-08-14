@@ -37,13 +37,13 @@ class RecommendedListCell: UICollectionViewCell {
         purchaseButtonOverlayView.layer.shadowOpacity = 0.5
     }
     
-    func setTitles(title: String, subtitle: String, price: Int) {
+    func update(title: String, subtitle: String, price: Int) {
         updateTitleText(text: title)
         updateSubtitleText(text: subtitle)
         self.purchaseButton.setTitle("¥\(price)", for: .normal)
     }
     
-    func updateTitleText(text: String) {
+    private func updateTitleText(text: String) {
         let titleAttributes: [NSAttributedString.Key: Any] = {
             let style = NSMutableParagraphStyle.generate(alignment: .left, lineSpacing: 5)
             return NSAttributedString.generate(foregroundColor: UIColor.customBlack,
@@ -55,7 +55,7 @@ class RecommendedListCell: UICollectionViewCell {
         self.titleLabel.attributedText = NSAttributedString(string: text, attributes: titleAttributes)
     }
     
-    func updateSubtitleText(text: String) {
+    private func updateSubtitleText(text: String) {
         let subtitleAttributes: [NSAttributedString.Key: Any] = {
             let style = NSMutableParagraphStyle.generate(alignment: .left)
             let attributes = NSAttributedString.generate(foregroundColor: UIColor.customGray,
