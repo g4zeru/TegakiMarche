@@ -40,7 +40,7 @@ class RecommendedListCell: UICollectionViewCell {
     func update(title: String, subtitle: String, price: Int) {
         updateTitleText(text: title)
         updateSubtitleText(text: subtitle)
-        self.purchaseButton.setTitle("¥\(price)", for: .normal)
+        self.purchaseButton.setTitle("¥\(price.separatedByThreeDigitsWithComma)", for: .normal)
     }
     
     private func updateTitleText(text: String) {
