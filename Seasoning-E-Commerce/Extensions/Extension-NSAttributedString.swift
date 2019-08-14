@@ -8,7 +8,7 @@
 import UIKit
 
 extension NSAttributedString {
-    static var defaultTitleAttribute: [NSAttributedString.Key: Any] {
+    class var defaultTitleAttribute: [NSAttributedString.Key: Any] {
         var keys = [NSAttributedString.Key: Any]()
         let style = NSMutableParagraphStyle()
         style.alignment = .left
@@ -19,7 +19,7 @@ extension NSAttributedString {
         return keys
     }
     
-    static func generate(foregroundColor: UIColor = UIColor.black, backgroundColor: UIColor = UIColor.white, font: UIFont, paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle(), anyKeys: [NSAttributedString.Key: Any] = [:])->[NSAttributedString.Key: Any] {
+    class func generate(foregroundColor: UIColor = UIColor.black, backgroundColor: UIColor = UIColor.white, font: UIFont, paragraphStyle: NSMutableParagraphStyle = NSMutableParagraphStyle(), anyKeys: [NSAttributedString.Key: Any] = [:])->[NSAttributedString.Key: Any] {
         var keys = [NSAttributedString.Key: Any]()
         anyKeys.forEach { (key, value) in
             keys.updateValue(value, forKey: key)
