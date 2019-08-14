@@ -11,5 +11,6 @@ struct Item {
     let title: String
     let description: String
     let price: Int
-    let images: [URL]
+    let rate: Double
+    let image: URL
 }
