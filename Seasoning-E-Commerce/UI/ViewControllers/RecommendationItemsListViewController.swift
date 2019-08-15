@@ -54,9 +54,9 @@ extension RecommendationItemsListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if section == 0 {
+        if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendedlist", for: indexPath) as! RecommendedListCell
-            cell.update(title: <#T##String#>, subtitle: <#T##String#>, price: <#T##Int#>)
+            cell.update(item: recommendationItems[indexPath.item])
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hotranking", for: indexPath) as! HotRankingCell
