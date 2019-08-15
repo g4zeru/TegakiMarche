@@ -28,9 +28,10 @@ class HotRankingCell: UICollectionViewCell {
         overlayView.layer.cornerRadius = 10
     }
     
-    func update(title: String, price: Int) {
-        updateTitleLabel(text: title)
-        self.priceLabel.text = "¥\(price)"
+    func update(item: Item) {
+        updateTitleLabel(text: item.title)
+        self.thumbnailImageView.setImage(url: item.image)
+        self.priceLabel.text = "¥\(item.price)"
     }
 
     private func updateTitleLabel(text: String) {

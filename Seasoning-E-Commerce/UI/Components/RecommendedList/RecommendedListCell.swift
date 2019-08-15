@@ -8,10 +8,11 @@
 import UIKit
 
 class RecommendedListCell: UICollectionViewCell {
-    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet private weak var overlayView: UIView!
     @IBOutlet private weak var thumbnailImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
+    @IBOutlet private weak var rateLabel: UILabel!
     @IBOutlet private weak var optionsView: UIView!
     @IBOutlet private weak var likeButton: UIButton!
     @IBOutlet private weak var shareButton: UIButton!
@@ -41,6 +42,7 @@ class RecommendedListCell: UICollectionViewCell {
         self.thumbnailImageView.setImage(url: item.image)
         self.updateTitleText(text: item.title)
         self.updateSubtitleText(text: item.description)
+        self.rateLabel.text = String(item.rate)
         self.purchaseButton.setTitle("¥\(item.price.separatedByThreeDigitsWithComma)", for: .normal)
     }
     

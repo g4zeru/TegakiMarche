@@ -20,6 +20,7 @@
                     <string key="text">Today’s 
 Recommendations!</string>
                     <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="35"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
