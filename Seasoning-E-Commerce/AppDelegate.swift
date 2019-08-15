@@ -17,7 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = RecommendationItemsListViewController()
+        window?.rootViewController = ItemDetailsViewController(item: Item(title: "自家農園産自然栽培原料•低温圧搾生搾り黒ごま油110g",
+                                                                          description: "自然栽培で育てた生命力溢れる落花生を伝統の玉締めと同じ原理の直圧式搾油機を使用して低温で丁寧に圧搾した無添加•無着色•無調整の非加熱完全生搾り落花生油です。",
+                                                                          price: 1300,
+                                                                          rate: 4.7,
+                                                                          image: URL(string: "https://images-na.ssl-images-amazon.com/images/I/61X%2BmhmmooL.jpg")!))
         window?.makeKeyAndVisible()
         return true
     }
