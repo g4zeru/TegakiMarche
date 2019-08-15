@@ -37,10 +37,10 @@ class RecommendedListCell: UICollectionViewCell {
         purchaseButtonOverlayView.layer.shadowOpacity = 0.5
     }
     
-    func update(title: String, subtitle: String, price: Int) {
-        updateTitleText(text: title)
-        updateSubtitleText(text: subtitle)
-        self.purchaseButton.setTitle("¥\(price.separatedByThreeDigitsWithComma)", for: .normal)
+    func update(item: Item) {
+        updateTitleText(text: item.title)
+        updateSubtitleText(text: item.description)
+        self.purchaseButton.setTitle("¥\(item.price.separatedByThreeDigitsWithComma)", for: .normal)
     }
     
     private func updateTitleText(text: String) {
