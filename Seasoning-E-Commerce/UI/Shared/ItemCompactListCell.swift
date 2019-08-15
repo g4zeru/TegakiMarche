@@ -14,7 +14,7 @@ class ItemCompactListCell: UICollectionViewCell {
     @IBOutlet private weak var subtitleLabel: UILabel!
     
     class var cellHeightRatio: CGFloat {
-        return 312/177
+        return 350/218
     }
     
     override func awakeFromNib() {
@@ -30,6 +30,6 @@ class ItemCompactListCell: UICollectionViewCell {
     func update(title: String, price: Int, image: UIImage) {
         self.thumbnailImageView.image = image
         self.titleLabel.text = title
-        self.titleLabel.text = "¥" + price.separatedByThreeDigitsWithComma
+        self.subtitleLabel.text = "¥" + price.separatedByThreeDigitsWithComma
     }
 }

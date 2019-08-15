@@ -16,7 +16,7 @@ class ItemListCell: UICollectionViewCell {
     @IBOutlet weak var likeButton: UIButton!
     
     class var cellHeightRatio: CGFloat {
-        return 244/177
+        return 312/177
     }
     
     override func awakeFromNib() {
