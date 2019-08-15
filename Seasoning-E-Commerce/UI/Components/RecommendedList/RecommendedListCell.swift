@@ -8,10 +8,11 @@
 import UIKit
 
 class RecommendedListCell: UICollectionViewCell {
-    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet private weak var overlayView: UIView!
     @IBOutlet private weak var thumbnailImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
+    @IBOutlet private weak var rateLabel: UILabel!
     @IBOutlet private weak var optionsView: UIView!
     @IBOutlet private weak var likeButton: UIButton!
     @IBOutlet private weak var shareButton: UIButton!
@@ -28,19 +29,21 @@ class RecommendedListCell: UICollectionViewCell {
         self.layer.shadowOffset = CGSize(width: 2, height: 3)
         self.layer.shadowRadius = 3
         self.layer.shadowOpacity = 0.5
-        overlayView.layer.cornerRadius = 10
-        overlayView.layer.masksToBounds = true
-        optionsView.layer.cornerRadius = 15
-        purchaseButtonOverlayView.layer.cornerRadius = 10
-        purchaseButtonOverlayView.layer.shadowOffset = CGSize(width: 2, height: 3)
-        purchaseButtonOverlayView.layer.shadowRadius = 3
-        purchaseButtonOverlayView.layer.shadowOpacity = 0.5
+        self.overlayView.layer.cornerRadius = 10
+        self.overlayView.layer.masksToBounds = true
+        self.optionsView.layer.cornerRadius = 15
+        self.purchaseButtonOverlayView.layer.cornerRadius = 10
+        self.purchaseButtonOverlayView.layer.shadowOffset = CGSize(width: 2, height: 3)
+        self.purchaseButtonOverlayView.layer.shadowRadius = 3
+        self.purchaseButtonOverlayView.layer.shadowOpacity = 0.5
     }
     
-    func update(title: String, subtitle: String, price: Int) {
-        updateTitleText(text: title)
-        updateSubtitleText(text: subtitle)
-        self.purchaseButton.setTitle("¥\(price.separatedByThreeDigitsWithComma)", for: .normal)
+    func update(item: Item) {
+        self.thumbnailImageView.setImage(url: item.image)
+        self.updateTitleText(text: item.title)
+        self.updateSubtitleText(text: item.description)
+        self.rateLabel.text = String(item.rate)
+        self.purchaseButton.setTitle("¥\(item.price.separatedByThreeDigitsWithComma)", for: .normal)
     }
     
     private func updateTitleText(text: String) {
