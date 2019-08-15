@@ -2,8 +2,7 @@
 //  Seasoning_E_CommerceUITests.swift
 //  Seasoning-E-CommerceUITests
 //
-//  Created by iniad on 2019/07/04.
-//  Copyright © 2019 g4zeru. All rights reserved.
+//  Created by iniad on 2019/08/15.
 //
 
 import XCTest
@@ -27,8 +26,8 @@ class Seasoning_E_CommerceUITests: XCTestCase {
     }
 
     func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let app = XCUIApplication()
+        let collectionView = app.collectionViews["TestCollectionView"]
+        collectionView.swipeDown()
     }
-
 }
