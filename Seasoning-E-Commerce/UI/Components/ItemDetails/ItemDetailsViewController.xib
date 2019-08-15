@@ -64,7 +64,7 @@
                                     <rect key="frame" x="0.0" y="542" width="414" height="80"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWA-Xe-f21">
-                                            <rect key="frame" x="20" y="0.0" width="274.5" height="20"/>
+                                            <rect key="frame" x="20" y="5" width="274.5" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="9Ml-Op-Y73"/>
                                             </constraints>
@@ -104,7 +104,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="llf-TA-iG2">
-                                            <rect key="frame" x="20" y="35" width="116.5" height="35"/>
+                                            <rect key="frame" x="20" y="40" width="116.5" height="35"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaW-OS-a9U">
                                                     <rect key="frame" x="15" y="7" width="21" height="21"/>
@@ -137,11 +137,11 @@
                                     <constraints>
                                         <constraint firstItem="llf-TA-iG2" firstAttribute="leading" secondItem="Ypw-Vq-pI3" secondAttribute="leading" constant="20" id="7bY-Ix-P0b"/>
                                         <constraint firstItem="cQR-lA-msL" firstAttribute="leading" secondItem="cWA-Xe-f21" secondAttribute="trailing" constant="10" id="BYe-Qh-pAA"/>
-                                        <constraint firstAttribute="bottom" secondItem="llf-TA-iG2" secondAttribute="bottom" constant="10" id="HwD-Pd-PdK"/>
+                                        <constraint firstAttribute="bottom" secondItem="llf-TA-iG2" secondAttribute="bottom" constant="5" id="HwD-Pd-PdK"/>
                                         <constraint firstItem="llf-TA-iG2" firstAttribute="top" secondItem="cWA-Xe-f21" secondAttribute="bottom" constant="15" id="JrZ-Uo-ieh"/>
                                         <constraint firstAttribute="bottom" secondItem="ibF-Aj-GgT" secondAttribute="bottom" constant="10" id="X7L-Zz-VZ1"/>
                                         <constraint firstItem="ibF-Aj-GgT" firstAttribute="top" secondItem="Ypw-Vq-pI3" secondAttribute="top" constant="10" id="jNT-Rh-yW9"/>
-                                        <constraint firstItem="cWA-Xe-f21" firstAttribute="top" secondItem="Ypw-Vq-pI3" secondAttribute="top" id="jle-zs-9E5"/>
+                                        <constraint firstItem="cWA-Xe-f21" firstAttribute="top" secondItem="Ypw-Vq-pI3" secondAttribute="top" constant="5" id="jle-zs-9E5"/>
                                         <constraint firstItem="cWA-Xe-f21" firstAttribute="leading" secondItem="Ypw-Vq-pI3" secondAttribute="leading" constant="20" id="mzY-hq-PGP"/>
                                         <constraint firstAttribute="trailing" secondItem="ibF-Aj-GgT" secondAttribute="trailing" constant="20" id="ozp-xU-OkT"/>
                                         <constraint firstAttribute="height" constant="80" id="xF1-af-DkB"/>
@@ -150,8 +150,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqn-eM-aJD">
                                     <rect key="frame" x="0.0" y="622" width="414" height="187.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7B-Jj-Fgw">
-                                            <rect key="frame" x="10" y="15" width="0.0" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品説明" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7B-Jj-Fgw">
+                                            <rect key="frame" x="10" y="15" width="60" height="20.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20.5" id="nfz-me-rQQ"/>
                                             </constraints>
@@ -235,7 +235,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mtY-Yy-lFV" secondAttribute="trailing" id="xY5-kU-V4A"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="47.826086956521742" y="129.57589285714286"/>
+            <point key="canvasLocation" x="48" y="137"/>
         </view>
     </objects>
     <resources>
