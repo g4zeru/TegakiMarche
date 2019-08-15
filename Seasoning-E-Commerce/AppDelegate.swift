@@ -17,7 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = RecommendationItemsListViewController()
+        window?.rootViewController = ItemDetailsViewController(item: Item(title: "ヨシダ　グルメのたれ　645g",
+                                                                          description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
+                                                                          price: 1300,
+                                                                          rate: 4.7,
+                                                                          image: URL(string: "https://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!))
         window?.makeKeyAndVisible()
         return true
     }
