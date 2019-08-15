@@ -11,17 +11,19 @@ import SnapKit
 class AdditionalContentImageView: UIView {
     let imageView: UIImageView = {
         let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.layer.masksToBounds = true
         return view
     }()
     init(image: URL, frame: CGRect = .zero) {
         super.init(frame: frame)
         self.addSubview(self.imageView)
         self.imageView.snp.makeConstraints { (maker) in
-            maker.top.equalToSuperview().offset(5)
+            maker.top.equalToSuperview().offset(10)
             maker.leading.equalToSuperview().offset(20)
             maker.trailing.equalToSuperview().offset(-20)
-            maker.bottom.equalToSuperview().offset(-5)
-            maker.width.equalTo(self.imageView.snp.height).multipliedBy(376/232)
+            maker.bottom.equalToSuperview()
+            maker.width.equalTo(self.imageView.snp.height).multipliedBy(3.5/2)
         }
         self.imageView.setImage(url: image)
     }

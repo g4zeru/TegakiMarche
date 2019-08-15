@@ -34,7 +34,7 @@ class AdditionalContentPurchaseButtonView: UIView {
             maker.centerY.equalToSuperview()
             maker.centerX.equalToSuperview()
             maker.width.equalTo(self.overlayView.snp.height).multipliedBy(86/13)
-            maker.top.equalToSuperview().offset(10)
+            maker.top.equalToSuperview().offset(20)
             maker.leading.equalToSuperview().offset(35)
         }
         
