@@ -20,7 +20,7 @@ class RecommendedListCell: UICollectionViewCell {
     @IBOutlet private weak var purchaseButtonOverlayView: UIView!
     
     class var cellHeightRatio: CGFloat {
-        return 530/363
+        return 26/18
     }
     
     override func awakeFromNib() {
@@ -31,9 +31,8 @@ class RecommendedListCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.2
         self.overlayView.layer.cornerRadius = 10
         self.overlayView.layer.masksToBounds = true
-        self.optionsView.layer.cornerRadius = 15
-        self.purchaseButtonOverlayView.layer.cornerRadius = 10
-        
+        self.optionsView.layer.cornerRadius = self.optionsView.frame.height/2
+        self.purchaseButtonOverlayView.layer.cornerRadius = self.purchaseButtonOverlayView.frame.height/2
     }
     
     func update(item: Item) {

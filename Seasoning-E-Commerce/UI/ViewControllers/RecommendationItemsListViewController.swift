@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 class RecommendationItemsListViewController: UIViewController {
-    var recommendationItems: [Item] = [Item(title: "ヨシダ　グルメのたれ　645g",
-                                            description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
+    var recommendationItems: [Item] = [Item(title: "自家農園産自然栽培原料•低温圧搾生搾り黒ごま油110g",
+                                            description: "自然栽培で育てた生命力溢れる落花生を使用した最高級油です。",
                                             price: 1300,
                                             rate: 4.7,
                                             image: URL(string: "https://images-na.ssl-images-amazon.com/images/I/61X%2BmhmmooL.jpg")!),
@@ -44,7 +44,7 @@ class RecommendationItemsListViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 35, right: 0)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = UIColor.clear
-        view.contentInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        view.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         view.register(UINib(nibName: "RecommendedListCell", bundle: nil), forCellWithReuseIdentifier: "recommendedlist")
         view.register(UINib(nibName: "HotRankingCell", bundle: nil), forCellWithReuseIdentifier: "hotranking")
         view.register(UINib(nibName: "ListHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "listheader")
@@ -121,9 +121,9 @@ extension RecommendationItemsListViewController: UICollectionViewDelegateFlowLay
         if kind == UICollectionView.elementKindSectionHeader {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "listheader", for: indexPath) as! ListHeaderView
             if indexPath.section == 0 {
-                header.update(title: "Today’s\nRecommendations!")
+                header.update(title: "Daily choice")
             } else {
-                header.update(title: "Hot Ranking")
+                header.update(title: "Weekly Ranking")
             }
             return header
         } else {
@@ -132,10 +132,6 @@ extension RecommendationItemsListViewController: UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section == 0 {
-            return CGSize(width: collectionView.frame.width, height: 88)
-        } else {
-            return CGSize(width: collectionView.frame.width, height: 44)
-        }
+        return CGSize(width: collectionView.frame.width, height: 30)
     }
 }
