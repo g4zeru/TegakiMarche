@@ -19,25 +19,25 @@ class RecommendationItemsListViewController: UIViewController {
                                             price: 900,
                                             rate: 3.5,
                                             image: URL(string: "https://image.excite.co.jp/jp/erecipe/recipe/9/1/91e4ba3667cde1e9111b51d2d6665fc1/147e90fc3c338c69b76b80d7f59b0853.jpeg")!)]
-    var hotrankingItems: [Item] = [Item(title: "ヨシダ　グルメのたれ　645g",
+    var hotrankingItems: [Item] = [Item(title: "アカシアボウル-14cm",
                                         description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
                                         price: 1300,
                                         rate: 4.7,
-                                        image: URL(string: "https://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!),
-                                   Item(title: "三河産大豆の八丁味噌",
+                                        image: URL(string: "https://image.rakuten.co.jp/air-rhizome/cabinet/7/aks112.jpg")!),
+                                   Item(title: "備前焼スパゲティー皿",
                                         description: "伝統製法で造り続けている豆みその銘柄",
-                                        price: 900,
+                                        price: 1800,
                                         rate: 3.5,
-                                        image: URL(string: "https://images-na.ssl-images-amazon.com/images/I/612qvFjY8JL._SX522_.jpghttps://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!),
-                                   Item(title: "ヨシダ　グルメのたれ　645g",                                            description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
-                                        price: 1300,
+                                        image: URL(string: "https://image.rakuten.co.jp/mhomestyle/cabinet/bbbbbbbbbbb/04185669/imgrc0071002055.jpg")!),
+                                   Item(title: "塩レモンパスタソース2人前",                                            description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
+                                        price: 540,
                                         rate: 4.7,
-                                        image: URL(string: "https://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!),
+                                        image: URL(string: "https://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/4515996905971.jpg")!),
                                    Item(title: "三河産大豆の八丁味噌",
                                         description: "伝統製法で造り続けている豆みその銘柄",
-                                        price: 900,
+                                        price: 400,
                                         rate: 3.5,
-                                        image: URL(string: "https://images-na.ssl-images-amazon.com/images/I/612qvFjY8JL._SX522_.jpghttps://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!)]
+                                        image: URL(string: "https://www.asunal.jp/image/asunal/store/storage/w403/cname_20170928160824.jpg")!)]
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

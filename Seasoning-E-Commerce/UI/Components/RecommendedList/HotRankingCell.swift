@@ -39,7 +39,7 @@ class HotRankingCell: UICollectionViewCell {
             let style = NSMutableParagraphStyle.generate(alignment: .left, lineSpacing: 5)
             return NSAttributedString.generate(foregroundColor: UIColor.customBlack,
                                                backgroundColor: UIColor.clear,
-                                               font: UIFont.hiraginoW6(size: 11),
+                                               font: UIFont.hiraginoW6(size: 12),
                                                paragraphStyle: style)
         }()
         self.titleLabel.attributedText = NSAttributedString(string: text, attributes: titleAttributes)
