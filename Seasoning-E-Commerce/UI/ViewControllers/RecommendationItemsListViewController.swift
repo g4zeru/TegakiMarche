@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 class RecommendationItemsListViewController: UIViewController {
-    var recommendationItems: [Item] = [Item(title: "ヨシダ　グルメのたれ　645g",
-                                            description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
+    var recommendationItems: [Item] = [Item(title: "自家農園産自然栽培原料•低温圧搾生搾り黒ごま油110g",
+                                            description: "自然栽培で育てた生命力溢れる落花生を使用した最高級油です。",
                                             price: 1300,
                                             rate: 4.7,
                                             image: URL(string: "https://images-na.ssl-images-amazon.com/images/I/61X%2BmhmmooL.jpg")!),
@@ -19,32 +19,32 @@ class RecommendationItemsListViewController: UIViewController {
                                             price: 900,
                                             rate: 3.5,
                                             image: URL(string: "https://image.excite.co.jp/jp/erecipe/recipe/9/1/91e4ba3667cde1e9111b51d2d6665fc1/147e90fc3c338c69b76b80d7f59b0853.jpeg")!)]
-    var hotrankingItems: [Item] = [Item(title: "ヨシダ　グルメのたれ　645g",
+    var hotrankingItems: [Item] = [Item(title: "アカシアボウル-14cm",
                                         description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
                                         price: 1300,
                                         rate: 4.7,
-                                        image: URL(string: "https://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!),
-                                   Item(title: "三河産大豆の八丁味噌",
+                                        image: URL(string: "https://image.rakuten.co.jp/air-rhizome/cabinet/7/aks112.jpg")!),
+                                   Item(title: "備前焼スパゲティー皿",
                                         description: "伝統製法で造り続けている豆みその銘柄",
-                                        price: 900,
+                                        price: 1800,
                                         rate: 3.5,
-                                        image: URL(string: "https://images-na.ssl-images-amazon.com/images/I/612qvFjY8JL._SX522_.jpghttps://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!),
-                                   Item(title: "ヨシダ　グルメのたれ　645g",                                            description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
-                                        price: 1300,
+                                        image: URL(string: "https://image.rakuten.co.jp/mhomestyle/cabinet/bbbbbbbbbbb/04185669/imgrc0071002055.jpg")!),
+                                   Item(title: "塩レモンパスタソース2人前",                                            description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
+                                        price: 540,
                                         rate: 4.7,
-                                        image: URL(string: "https://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!),
+                                        image: URL(string: "https://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/4515996905971.jpg")!),
                                    Item(title: "三河産大豆の八丁味噌",
                                         description: "伝統製法で造り続けている豆みその銘柄",
-                                        price: 900,
+                                        price: 400,
                                         rate: 3.5,
-                                        image: URL(string: "https://images-na.ssl-images-amazon.com/images/I/612qvFjY8JL._SX522_.jpghttps://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!)]
+                                        image: URL(string: "https://www.asunal.jp/image/asunal/store/storage/w403/cname_20170928160824.jpg")!)]
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 35, right: 0)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = UIColor.clear
-        view.contentInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        view.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         view.register(UINib(nibName: "RecommendedListCell", bundle: nil), forCellWithReuseIdentifier: "recommendedlist")
         view.register(UINib(nibName: "HotRankingCell", bundle: nil), forCellWithReuseIdentifier: "hotranking")
         view.register(UINib(nibName: "ListHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "listheader")
@@ -121,9 +121,9 @@ extension RecommendationItemsListViewController: UICollectionViewDelegateFlowLay
         if kind == UICollectionView.elementKindSectionHeader {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "listheader", for: indexPath) as! ListHeaderView
             if indexPath.section == 0 {
-                header.update(title: "Today’s\nRecommendations!")
+                header.update(title: "Daily choice")
             } else {
-                header.update(title: "Hot Ranking")
+                header.update(title: "Weekly Ranking")
             }
             return header
         } else {
@@ -132,10 +132,6 @@ extension RecommendationItemsListViewController: UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if section == 0 {
-            return CGSize(width: collectionView.frame.width, height: 88)
-        } else {
-            return CGSize(width: collectionView.frame.width, height: 44)
-        }
+        return CGSize(width: collectionView.frame.width, height: 30)
     }
 }
