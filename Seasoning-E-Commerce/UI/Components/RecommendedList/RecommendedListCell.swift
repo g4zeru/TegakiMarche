@@ -26,16 +26,14 @@ class RecommendedListCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.masksToBounds = false
-        self.layer.shadowOffset = CGSize(width: 2, height: 3)
-        self.layer.shadowRadius = 3
-        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize(width: 1, height: 2)
+        self.layer.shadowRadius = 8
+        self.layer.shadowOpacity = 0.2
         self.overlayView.layer.cornerRadius = 10
         self.overlayView.layer.masksToBounds = true
         self.optionsView.layer.cornerRadius = 15
         self.purchaseButtonOverlayView.layer.cornerRadius = 10
-        self.purchaseButtonOverlayView.layer.shadowOffset = CGSize(width: 2, height: 3)
-        self.purchaseButtonOverlayView.layer.shadowRadius = 3
-        self.purchaseButtonOverlayView.layer.shadowOpacity = 0.5
+        
     }
     
     func update(item: Item) {

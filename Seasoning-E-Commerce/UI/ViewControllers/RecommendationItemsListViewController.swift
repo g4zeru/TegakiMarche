@@ -13,12 +13,12 @@ class RecommendationItemsListViewController: UIViewController {
                                             description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
                                             price: 1300,
                                             rate: 4.7,
-                                            image: URL(string: "https://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!),
+                                            image: URL(string: "https://images-na.ssl-images-amazon.com/images/I/61X%2BmhmmooL.jpg")!),
                                        Item(title: "三河産大豆の八丁味噌",
                                             description: "伝統製法で造り続けている豆みその銘柄",
                                             price: 900,
                                             rate: 3.5,
-                                            image: URL(string: "https://images-na.ssl-images-amazon.com/images/I/612qvFjY8JL._SX522_.jpghttps://dbcn1bdvswqbx.cloudfront.net/client_info/KALDI/itemimage/0658243002703.jpg")!)]
+                                            image: URL(string: "https://image.excite.co.jp/jp/erecipe/recipe/9/1/91e4ba3667cde1e9111b51d2d6665fc1/147e90fc3c338c69b76b80d7f59b0853.jpeg")!)]
     var hotrankingItems: [Item] = [Item(title: "ヨシダ　グルメのたれ　645g",
                                         description: "アメリカンドリームを手にした日本人が作ったグルメソース。",
                                         price: 1300,

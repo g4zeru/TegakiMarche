@@ -21,9 +21,9 @@ class HotRankingCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.masksToBounds = false
-        self.layer.shadowOffset = CGSize(width: 2, height: 3)
-        self.layer.shadowRadius = 3
-        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize(width: 1, height: 1)
+        self.layer.shadowRadius = 6
+        self.layer.shadowOpacity = 0.2
         overlayView.layer.masksToBounds = true
         overlayView.layer.cornerRadius = 10
     }
