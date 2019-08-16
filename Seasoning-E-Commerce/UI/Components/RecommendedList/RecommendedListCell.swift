@@ -67,5 +67,4 @@ class RecommendedListCell: UICollectionViewCell {
         
         self.subtitleLabel.attributedText = NSAttributedString(string: text, attributes: subtitleAttributes)
     }
-
 }
