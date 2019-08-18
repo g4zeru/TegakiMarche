@@ -39,7 +39,7 @@ class RecommendationItemsListViewController: UIViewController {
                                         rate: 3.5,
                                         image: URL(string: "https://www.asunal.jp/image/asunal/store/storage/w403/cname_20170928160824.jpg")!)]
     
-    let collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 35, right: 0)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
