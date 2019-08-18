@@ -8,12 +8,11 @@
 import UIKit
 
 class UserDetailsViewController: UIViewController {
-    
-    @IBOutlet weak var optionButton: UIButton!
-    @IBOutlet weak var optionButtonOverlayView: UIView!
-    @IBOutlet weak var firstButton: BottomBorderButton!
-    @IBOutlet weak var secondButton: BottomBorderButton!
-    @IBOutlet weak var firstCollectionView: UICollectionView!
+    @IBOutlet private weak var optionButton: UIButton!
+    @IBOutlet private weak var optionButtonOverlayView: UIView!
+    @IBOutlet private weak var firstButton: BottomBorderButton!
+    @IBOutlet private weak var secondButton: BottomBorderButton!
+    @IBOutlet private weak var firstCollectionView: UICollectionView!
     
     init() {
         super.init(nibName: "UserDetailsViewController", bundle: Bundle.main)
