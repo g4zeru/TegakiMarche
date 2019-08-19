@@ -9,9 +9,9 @@ target 'Seasoning-E-Commerce' do
   pod 'RxCocoa', '~>5'
   pod 'RxSwift', '~>5'
   pod 'SnapKit', '~>5'
-  pod 'Firebase/Auth'
+  pod 'Firebase/Auth' 
   pod 'Firebase/Firestore'
-
+  pod 'GoogleSignIn'
 
   target 'Seasoning-E-CommerceTests' do
     inherit! :search_paths
