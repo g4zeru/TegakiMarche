@@ -12,7 +12,7 @@ targets:
     settings:
       CURRENT_PROJECT_VERSION: "1"
       INFOPLIST_FILE: Seasoning-E-Commerce/info.plist
-      PRODUCT_BUNDLE_IDENTIFIER: com.g4zeru.Seasoning-E-Commerce
+      PRODUCT_BUNDLE_IDENTIFIER: com.terany.seasoning-e-commerce
       DEVELOPMENT_TEAM: 8446Z6F5D6
       SWIFT_VERSION: "5.0"
       IPHONEOS_DEPLOYMENT_TARGET: "12.0"
