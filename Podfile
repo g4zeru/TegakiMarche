@@ -12,6 +12,7 @@ target 'Seasoning-E-Commerce' do
   pod 'Firebase/Auth' 
   pod 'Firebase/Firestore'
   pod 'GoogleSignIn'
+  pod 'Ballcap'
 
   target 'Seasoning-E-CommerceTests' do
     inherit! :search_paths
