@@ -88,7 +88,6 @@ class ItemDetailsViewController: UIViewController {
         self.descriptionLabel.attributedText = NSAttributedString(string: item.description, attributes: attributes(fontSize: 15, lineSpacing: 12))
         self.priceLabel.text = "¥" + item.price.separatedByThreeDigitsWithComma
         self.rateLabel.text = String(item.rate)
-        self.contentImageView.setImage(url: item.image)
     }
     
     func updateAdditionalContents(contents: [AdditionalContent]) {

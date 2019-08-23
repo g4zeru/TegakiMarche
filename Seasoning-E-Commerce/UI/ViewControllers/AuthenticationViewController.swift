@@ -8,9 +8,12 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import RxSwift
 
 class AuthenticationViewController: UIViewController, GIDSignInUIDelegate {
     var authStateListener: AuthStateDidChangeListenerHandle?
+    let viewModel: AuthenticationViewModelType = AuthenticationViewModel()
+    let disposeBag = DisposeBag()
     private let signInWithGoogleButton = GIDSignInButton()
     override func loadView() {
         super.loadView()
@@ -30,14 +33,20 @@ class AuthenticationViewController: UIViewController, GIDSignInUIDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         authStateListener = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
-            if user != nil {
+            if let user = user {
+                self?.viewModel.inputs.createUser(authedUser: user)
+            }
+        }
+        viewModel.outputs
+            .customer
+            .subscribe(onNext: { [weak self] (_) in
                 if let nav = self?.navigationController {
                     nav.popViewController(animated: true)
                 } else {
                     self?.dismiss(animated: true, completion: nil)
                 }
-            }
-        }
+            })
+            .disposed(by: disposeBag)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -8,7 +8,10 @@
 import Foundation
 import Ballcap
 
-final class User: Object {
-    let uid: String = .init()
-    let name: String = .init()
+extension FirebaseDatastore {
+    @objcMembers
+    final class Customer: Codable, Modelable {
+        dynamic var uid: String = .init()
+        dynamic var name: String = .init()
+    }
 }

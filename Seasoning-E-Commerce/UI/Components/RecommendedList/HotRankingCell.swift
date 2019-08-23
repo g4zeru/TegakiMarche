@@ -30,7 +30,6 @@ class HotRankingCell: UICollectionViewCell {
     
     func update(item: Item) {
         updateTitleLabel(text: item.title)
-        self.thumbnailImageView.setImage(url: item.image)
         self.priceLabel.text = "¥\(item.price)"
     }
 

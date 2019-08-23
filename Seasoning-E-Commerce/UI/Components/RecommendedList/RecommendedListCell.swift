@@ -35,9 +35,7 @@ class RecommendedListCell: UICollectionViewCell {
         self.purchaseButtonOverlayView.layer.cornerRadius = self.purchaseButtonOverlayView.frame.height/2
     }
     
-    func update(item: Item) {
-        self.thumbnailImageView.setImage(url: item.image)
-        self.updateTitleText(text: item.title)
+    func update(item: Item) {        self.updateTitleText(text: item.title)
         self.updateSubtitleText(text: item.description)
         self.rateLabel.text = String(item.rate)
         self.purchaseButton.setTitle("¥\(item.price.separatedByThreeDigitsWithComma)", for: .normal)

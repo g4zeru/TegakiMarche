@@ -14,3 +14,4 @@ final class Shop: Object {
     let address: String = .init()
     let ownerID: String = .init()
 }
+
