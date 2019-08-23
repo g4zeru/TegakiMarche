@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import Ballcap
 
-struct User {
-    let uid: String
-    let name: String
+final class User: Object {
+    let uid: String = .init()
+    let name: String = .init()
 }

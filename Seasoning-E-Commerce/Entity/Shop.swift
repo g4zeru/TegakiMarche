@@ -6,11 +6,11 @@
 //
 
 import Foundation
+import Ballcap
 
-struct Shop {
-    let name: String
-    let description: String
-    let address: String
-    var items: [Item]
-    let ownerID: String
+final class Shop: Object {
+    let name: String = .init()
+    let description: String = .init()
+    let address: String = .init()
+    let ownerID: String = .init()
 }

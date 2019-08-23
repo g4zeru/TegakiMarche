@@ -5,12 +5,11 @@
 //  Created by iniad on 2019/07/08.
 //
 
-import Foundation
+import Ballcap
 
-struct Item {
-    let title: String
-    let description: String
-    let price: Int
-    let rate: Double
-    let image: URL
+final class Item: Object {
+    let title: String = .init()
+    let description: String = .init()
+    let price: Int = .init()
+    let rate: Double = .init()
 }

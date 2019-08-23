@@ -6,6 +6,7 @@
 //  Copyright © 2019 g4zeru. All rights reserved.
 //
 
+import Ballcap
 import UIKit
 import Firebase
 import GoogleSignIn
@@ -19,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
         FirebaseApp.configure()
+        BallcapApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = AuthenticationController.sharedInstance
         return true
