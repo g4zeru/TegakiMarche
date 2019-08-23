@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.present(AuthenticationViewController(), animated: true, completion: nil)
+        if Auth.auth().currentUser == nil {
+            self.present(AuthenticationViewController(), animated: true, completion: nil)
+        }
     }
 }
