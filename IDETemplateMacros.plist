@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+<key>FILEHEADER</key>
+    <string> 
+// Copyright: © ___YEAR___, g4zeru All Rights Reserved.
+// Target: ___TARGETNAME___.
+// CreatedAt: ___TIME___.
+// GitHub: https://github.com/g4zeru/Seasoning-E-Commerce
+//</string>
+</dict>
+</plist>
