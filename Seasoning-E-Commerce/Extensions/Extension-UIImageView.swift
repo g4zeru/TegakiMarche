@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 extension UIImageView {
     func setImage(url: URL) {

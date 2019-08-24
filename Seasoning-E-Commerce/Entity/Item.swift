@@ -7,9 +7,12 @@
 
 import Ballcap
 
-final class Item: Object {
-    let title: String = .init()
-    let description: String = .init()
-    let price: Int = .init()
-    let rate: Double = .init()
+extension FirebaseDatastore {
+    final class Item: Object {
+        dynamic var title: String = .init()
+        dynamic var description: String = .init()
+        dynamic var price: Int = .init()
+        dynamic var rate: Double = .init()
+        dynamic var imagePath: String = .init()
+    }
 }

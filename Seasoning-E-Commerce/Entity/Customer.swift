@@ -13,5 +13,6 @@ extension FirebaseDatastore {
     final class Customer: Codable, Modelable {
         dynamic var uid: String = .init()
         dynamic var name: String = .init()
+        dynamic var profileImagePath: String = .init()
     }
 }
