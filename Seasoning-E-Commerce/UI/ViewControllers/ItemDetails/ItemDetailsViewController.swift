@@ -29,7 +29,7 @@ class ItemDetailsViewController: UIViewController {
     @IBOutlet private weak var purchaseButtonOverlayView: UIView!
     @IBOutlet private weak var additionalContentsStackView: UIStackView!
     
-    let item: Item
+    let item: FirebaseDatastore.Item
     
     var additionalContents: [AdditionalContent] = {
         var content = [AdditionalContent]()
@@ -54,7 +54,7 @@ class ItemDetailsViewController: UIViewController {
         return style
     }
     
-    init(item: Item) {
+    init(item: FirebaseDatastore.Item) {
         self.item = item
         super.init(nibName: "ItemDetailsViewController", bundle: Bundle.main)
     }
