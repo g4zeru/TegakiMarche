@@ -130,6 +130,9 @@ PODS:
   - RxCocoa (5.0.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
+  - RxOptional (4.0.0):
+    - RxCocoa (~> 5)
+    - RxSwift (~> 5)
   - RxRelay (5.0.0):
     - RxSwift (~> 5)
   - RxSwift (5.0.0)
@@ -141,6 +144,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - GoogleSignIn
   - RxCocoa (~> 5)
+  - RxOptional
   - RxSwift (~> 5)
   - SnapKit (~> 5)
 
@@ -167,6 +171,7 @@ SPEC REPOS:
     - nanopb
     - Protobuf
     - RxCocoa
+    - RxOptional
     - RxRelay
     - RxSwift
     - SnapKit
@@ -193,10 +198,11 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 3f617b9a6e73605565086864c9bc26b2bf2dd5a3
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxOptional: 9904e2219d59260c3c171273d475b2126de187e8
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
 
-PODFILE CHECKSUM: 0cf1f818d5e162bd2a5a9ecac996160ca212f544
+PODFILE CHECKSUM: cf36ef3a5e02acdfb1503d28b0abb9d8bd37ac45
 
 COCOAPODS: 1.7.2

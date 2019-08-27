@@ -8,6 +8,7 @@ target 'Seasoning-E-Commerce' do
   # Pods for Seasoning-E-Commerce
   pod 'RxCocoa', '~>5'
   pod 'RxSwift', '~>5'
+  pod 'RxOptional'
   pod 'SnapKit', '~>5'
   pod 'Firebase/Auth' 
   pod 'Firebase/Firestore'
