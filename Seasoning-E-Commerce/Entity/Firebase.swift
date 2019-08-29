@@ -7,10 +7,16 @@
 
 import Foundation
 import Firebase
+import Ballcap
 
 class FirebaseDatastore {
     static let baseRef = Firestore.firestore().collection("datastore")
     static var standardDatastore: DocumentReference {
         return baseRef.document("v1")
     }
+}
+
+protocol FirebaseDatastoreQuery: Modelable & Codable {
+    typealias DatastoreQuery = DataSource<Document<Self>>
+    static var baseQuery: DatastoreQuery.Query { get }
 }
