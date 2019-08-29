@@ -12,8 +12,7 @@ extension FirebaseDatastore {
     final class Item: Modelable, Codable {
         dynamic var title: String = ""
         dynamic var desc: String = ""
-        ///default value
-        dynamic var price: Int = 500
+        dynamic var price: Int = 0
         dynamic var isPublished: Bool = true
         dynamic var publishedAt: Date = Date()
         dynamic var imagePath: String = ""
