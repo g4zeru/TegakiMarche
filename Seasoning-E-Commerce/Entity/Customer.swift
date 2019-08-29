@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 import Ballcap
 
 extension FirebaseDatastore {
@@ -15,9 +16,15 @@ extension FirebaseDatastore {
         dynamic var name: String = .init()
         dynamic var isBanned: Bool = false
         dynamic var email: String? = nil
-        dynamic var profileImagePath: String = .init()
     }
 }
+
+extension Document where Model: FirebaseDatastore.User {
+    var profileImageStoragePath: StorageReference {
+        return Storage.storage().reference().child("user").child(id).child("profileImage")
+    }
+}
+
 extension FirebaseDatastore.User: FirebaseDatastoreQuery {
     static var baseQuery: DataSource<Document<FirebaseDatastore.User>>.Query {
         return Document<FirebaseDatastore.User>
