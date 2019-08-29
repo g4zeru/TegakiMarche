@@ -12,8 +12,8 @@ target 'Seasoning-E-Commerce' do
   pod 'SnapKit', '~>5'
   pod 'Firebase/Auth' 
   pod 'Firebase/Firestore'
-  pod 'GoogleSignIn'
-  pod 'Ballcap'
+  pod 'GoogleSignIn' '~> 4.0.2'
+  pod 'Ballcap', '~>0.9.3'
 
   target 'Seasoning-E-CommerceTests' do
     inherit! :search_paths
