@@ -7,6 +7,7 @@
 
 import Ballcap
 import FirebaseStorage
+import Firebase
 
 extension FirebaseDatastore {
     final class Item: Modelable, Codable {
@@ -14,8 +15,8 @@ extension FirebaseDatastore {
         dynamic var desc: String = ""
         dynamic var price: Int = 0
         dynamic var isPublished: Bool = true
-        dynamic var publishedAt: Date = Date()
-        dynamic var imagePath: String = ""
+        dynamic var publishedAt: Timestamp = Timestamp()
+        dynamic var imagePath: String? = ""
     }
 }
 
