@@ -12,7 +12,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-class AuthenticationViewController: UIViewController, GIDSignInUIDelegate {
+class AuthenticationViewController: UIViewController {
     var authStateListener: AuthStateDidChangeListenerHandle?
     let disposeBag = DisposeBag()
     private let signInWithGoogleButton = GIDSignInButton()
@@ -27,7 +27,7 @@ class AuthenticationViewController: UIViewController, GIDSignInUIDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        GIDSignIn.sharedInstance()?.uiDelegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
