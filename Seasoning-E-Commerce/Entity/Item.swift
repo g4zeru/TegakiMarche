@@ -19,9 +19,9 @@ extension FirebaseDatastore {
     }
 }
 
-extension FirebaseDatastore.Item {
-    var storageImageRef: StorageReference {
-        return Storage.storage().reference().child(imagePath)
+extension Document where Model: FirebaseDatastore.Item {
+    var storageOriginImageRef: StorageReference {
+        return Storage.storage().reference().child("item").child(id).child("originImg")
     }
 }
 
