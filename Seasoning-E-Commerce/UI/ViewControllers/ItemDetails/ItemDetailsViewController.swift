@@ -81,9 +81,9 @@ class ItemDetailsViewController: UIViewController {
 
     func updateContents() {
         self.titleLabel.attributedText = NSAttributedString(string: item.title, attributes: attributes(fontSize: 20, lineSpacing: 10, isBold: true))
-        self.descriptionLabel.attributedText = NSAttributedString(string: item.description, attributes: attributes(fontSize: 15, lineSpacing: 12))
+        self.descriptionLabel.attributedText = NSAttributedString(string: item.desc, attributes: attributes(fontSize: 15, lineSpacing: 12))
         self.priceLabel.text = "¥" + item.price.separatedByThreeDigitsWithComma
-        self.rateLabel.text = String(item.rate)
+        //self.rateLabel.text = String(item.rate)
     }
 
     func updateAdditionalContents(contents: [AdditionalContent]) {

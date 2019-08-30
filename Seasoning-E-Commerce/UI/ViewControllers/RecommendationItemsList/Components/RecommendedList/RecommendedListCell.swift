@@ -34,11 +34,11 @@ class RecommendedListCell: UICollectionViewCell {
         self.optionsView.layer.cornerRadius = self.optionsView.frame.height / 2
         self.purchaseButtonOverlayView.layer.cornerRadius = self.purchaseButtonOverlayView.frame.height / 2
     }
-
-    func update(item: FirebaseDatastore.Item) {
+    
+    func update(item: FirebaseDatastore.Item) {        
         self.updateTitleText(text: item.title)
-        self.updateSubtitleText(text: item.description)
-        self.rateLabel.text = String(item.rate)
+        self.updateSubtitleText(text: item.desc)
+        //self.rateLabel.text = String(item.rate)
         self.purchaseButton.setTitle("¥\(item.price.separatedByThreeDigitsWithComma)", for: .normal)
     }
 

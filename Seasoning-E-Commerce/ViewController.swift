@@ -26,5 +26,16 @@ class ViewController: UIViewController {
         if Auth.auth().currentUser == nil {
             self.present(AuthenticationViewController(), animated: true, completion: nil)
         }
+        Document<FirebaseDatastore.Item>.query
+            .where("isPublished", isEqualTo: true)
+            .order(by: "publishedAt", descending: true)
+            .dataSource()
+            .retrieve(from: { (snapshot, documentSnapshot, done) in
+                let document: Document<FirebaseDatastore.Item> = Document(documentSnapshot.reference)
+                document.get { (item, error) in
+                    print(item)
+                }
+            })
+            .get()
     }
 }

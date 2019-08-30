@@ -6,13 +6,28 @@
 //
 
 import Ballcap
+import FirebaseStorage
+import Firebase
 
 extension FirebaseDatastore {
-    final class Item: Object {
-        dynamic var title: String = .init()
-        dynamic var description: String = .init()
-        dynamic var price: Int = .init()
-        dynamic var rate: Double = .init()
-        dynamic var imagePath: String = .init()
+    final class Item: Modelable, Codable {
+        dynamic var title: String = ""
+        dynamic var desc: String = ""
+        dynamic var price: Int = 0
+        dynamic var isPublished: Bool = true
+        dynamic var publishedAt: Timestamp = Timestamp()
+        dynamic var imagePath: String? = ""
+    }
+}
+
+extension Document where Model: FirebaseDatastore.Item {
+    var storageOriginImageRef: StorageReference {
+        return Storage.storage().reference().child("item").child(id).child("originImg")
+    }
+}
+
+extension FirebaseDatastore.Item: FirebaseDatastoreQuery {
+    static var baseQuery: DataSource<Document<FirebaseDatastore.Item>>.Query {
+        return Document<FirebaseDatastore.Item>.query
     }
 }
