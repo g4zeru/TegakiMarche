@@ -5,8 +5,8 @@
 //  Created by iniad on 2019/08/15.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class AdditionalContentPurchaseButtonView: UIView {
     let overlayView: UIView = {
@@ -26,23 +26,24 @@ class AdditionalContentPurchaseButtonView: UIView {
         button.setTitleColor(UIColor.darkGray, for: .normal)
         return button
     }()
-    override init(frame: CGRect) {
+
+    override internal init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(self.overlayView)
         self.overlayView.addSubview(self.button)
-        self.overlayView.snp.makeConstraints { (maker) in
+        self.overlayView.snp.makeConstraints { maker in
             maker.centerY.equalToSuperview()
             maker.centerX.equalToSuperview()
-            maker.width.equalTo(self.overlayView.snp.height).multipliedBy(86/13)
+            maker.width.equalTo(self.overlayView.snp.height).multipliedBy(86 / 13)
             maker.top.equalToSuperview().offset(20)
             maker.leading.equalToSuperview().offset(35)
         }
-        
-        self.button.snp.makeConstraints { (maker) in
+
+        self.button.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
