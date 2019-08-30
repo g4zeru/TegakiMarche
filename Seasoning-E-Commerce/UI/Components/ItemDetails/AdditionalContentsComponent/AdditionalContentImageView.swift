@@ -15,6 +15,7 @@ class AdditionalContentImageView: UIView {
         view.layer.masksToBounds = true
         return view
     }()
+
     init(image: URL, frame: CGRect = .zero) {
         super.init(frame: frame)
         self.addSubview(self.imageView)

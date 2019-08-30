@@ -35,13 +35,10 @@ class ItemDetailsViewController: UIViewController {
         content.append(.headline("おすすめの食べ方"))
         content.append(.subHeadline("餃子"))
         content.append(.text( "淡口醤油と餃子の組み合わせは大いにおすすめです。お酢で餃子を食べるのが好きな方は多いと思いますが、酢を引き立てた酢醤油という印象です。さっぱり食べたい方にも。"))
-        content.append(.image(URL(string: "https://s-shoyu.com/img/color/re/720/218.jpg")!))
         content.append(.subHeadline("天ぷら"))
         content.append(.text( "カラッと揚がりサクサクの天ぷらを楽しむことができます。その上ヘルシーに仕上がるのでカロリーを気にせず食べられます。"))
-        content.append(.image(URL(string: "https://www.tokyo-midtown.com/jp/restaurants/upload/thumb/2016/12/3F_9_main2-thumb-655xauto-920.jpg")!))
         content.append(.subHeadline("ししゃもフライ"))
         content.append(.text( "フライでもおいしいししゃも。旬の11～12月のししゃもは卵がぎっしりとつまっていてうま味たっぷり。揚げ物ですが、大きさもちょうど良くサクッと食べられるので思いのほかたくさん食べちゃった、なんてことも。"))
-        content.append(.image(URL(string: "https://s-shoyu.com/img/color/re/720/015.jpg")!))
         content.append(.button)
         return content
     }()
@@ -123,7 +120,14 @@ class ItemDetailsViewController: UIViewController {
         }
     }
 
-    func attributes(fontSize: CGFloat, lineSpacing: CGFloat = 0, isBold: Bool = false, alignment: NSTextAlignment = .left, textColor: UIColor = .darkGray, backgroundColor: UIColor = .clear) -> [NSAttributedString.Key: Any] {
+    func attributes(
+        fontSize: CGFloat,
+        lineSpacing: CGFloat = 0,
+        isBold: Bool = false,
+        alignment: NSTextAlignment = .left,
+        textColor: UIColor = .darkGray,
+        backgroundColor: UIColor = .clear
+        ) -> [NSAttributedString.Key: Any] {
         var attributes = [NSAttributedString.Key: Any]()
         let paragraphStyle: NSMutableParagraphStyle = {
             let style = NSMutableParagraphStyle()

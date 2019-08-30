@@ -15,6 +15,7 @@ class ShopDetailsViewController: UIViewController {
     @IBOutlet private weak var shopIconImageView: UIImageView!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var bookmarkButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

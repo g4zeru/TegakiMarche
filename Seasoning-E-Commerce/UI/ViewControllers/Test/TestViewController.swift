@@ -49,7 +49,7 @@ extension TestViewController: UICollectionViewDataSource {
             fatalError()
         }
         //cell.update(title: "ヨシダ グルメのたれ オリジナル 645g", buttonTitle: "レビュー", image: UIImage(named: "Item6")!)
-        cell.update(title: "ヨシダ グルメのたれ オリジナル 645g", price: 1_000, image: UIImage(named: "Item6")!)
+        cell.update(title: "ヨシダ グルメのたれ オリジナル 645g", price: 1_000, image: UIImage(named: "Item6") ?? UIImage())
         return cell
     }
 }

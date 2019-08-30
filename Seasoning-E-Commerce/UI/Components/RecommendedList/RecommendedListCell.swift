@@ -46,10 +46,12 @@ class RecommendedListCell: UICollectionViewCell {
     private func updateTitleText(text: String) {
         let titleAttributes: [NSAttributedString.Key: Any] = {
             let style = NSMutableParagraphStyle.generate(alignment: .left, lineSpacing: 5)
-            return NSAttributedString.generate(foregroundColor: UIColor.customBlack,
-                                               backgroundColor: UIColor.clear,
-                                               font: UIFont.hiraginoW6(size: 16),
-                                               paragraphStyle: style)
+            return NSAttributedString.generate(
+                foregroundColor: UIColor.customBlack,
+                backgroundColor: UIColor.clear,
+                font: UIFont.hiraginoW6(size: 16),
+                paragraphStyle: style
+            )
         }()
 
         self.titleLabel.attributedText = NSAttributedString(string: text, attributes: titleAttributes)
@@ -58,10 +60,12 @@ class RecommendedListCell: UICollectionViewCell {
     private func updateSubtitleText(text: String) {
         let subtitleAttributes: [NSAttributedString.Key: Any] = {
             let style = NSMutableParagraphStyle.generate(alignment: .left)
-            let attributes = NSAttributedString.generate(foregroundColor: UIColor.customGray,
-                                                         backgroundColor: UIColor.clear,
-                                                         font: UIFont.hiraginoW6(size: 14),
-                                                         paragraphStyle: style)
+            let attributes = NSAttributedString.generate(
+                foregroundColor: UIColor.customGray,
+                backgroundColor: UIColor.clear,
+                font: UIFont.hiraginoW6(size: 14),
+                paragraphStyle: style
+            )
             return attributes
         }()
 

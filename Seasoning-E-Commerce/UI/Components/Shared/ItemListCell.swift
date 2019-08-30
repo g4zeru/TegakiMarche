@@ -8,12 +8,12 @@
 import UIKit
 
 class ItemListCell: UICollectionViewCell {
-    @IBOutlet weak var overlayView: UIView!
-    @IBOutlet weak var thumbnailImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var button: UIButton!
-    @IBOutlet weak var buttonOverlayView: UIView!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet private weak var overlayView: UIView!
+    @IBOutlet private weak var thumbnailImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var button: UIButton!
+    @IBOutlet private weak var buttonOverlayView: UIView!
+    @IBOutlet private weak var likeButton: UIButton!
 
     class var cellHeightRatio: CGFloat {
         return 312 / 177

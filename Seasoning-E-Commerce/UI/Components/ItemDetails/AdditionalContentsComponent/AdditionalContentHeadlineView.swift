@@ -16,6 +16,7 @@ class AdditionalContentHeadlineView: UIView {
         view.textColor = UIColor.darkGray
         return view
     }()
+
     init(text: String, frame: CGRect = .zero) {
         super.init(frame: frame)
         self.addSubview(self.label)

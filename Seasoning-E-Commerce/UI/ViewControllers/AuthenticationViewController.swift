@@ -12,6 +12,7 @@ import UIKit
 class AuthenticationViewController: UIViewController, GIDSignInUIDelegate {
     var authStateListener: AuthStateDidChangeListenerHandle?
     private let signInWithGoogleButton = GIDSignInButton()
+
     override func loadView() {
         super.loadView()
         self.view.backgroundColor = UIColor.white
@@ -42,6 +43,9 @@ class AuthenticationViewController: UIViewController, GIDSignInUIDelegate {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        Auth.auth().removeStateDidChangeListener(authStateListener!)
+        guard let listener = authStateListener else {
+            return
+        }
+        Auth.auth().removeStateDidChangeListener(listener)
     }
 }
