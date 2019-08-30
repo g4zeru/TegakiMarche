@@ -9,6 +9,9 @@ targets:
     type: application
     platform: iOS
     sources: Seasoning-E-Commerce
+    prebuildScripts:
+     - name: Run sh
+       script: "${SRCROOT}/Build.sh"
     settings:
       CURRENT_PROJECT_VERSION: "1"
       INFOPLIST_FILE: Seasoning-E-Commerce/info.plist

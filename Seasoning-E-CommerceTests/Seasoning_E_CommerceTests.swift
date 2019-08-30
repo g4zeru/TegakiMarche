@@ -6,11 +6,10 @@
 //  Copyright © 2019 g4zeru. All rights reserved.
 //
 
-import XCTest
 @testable import Seasoning_E_Commerce
+import XCTest
 
-class Seasoning_E_CommerceTests: XCTestCase {
-
+class SeasoningECommerceTests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -30,5 +29,4 @@ class Seasoning_E_CommerceTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

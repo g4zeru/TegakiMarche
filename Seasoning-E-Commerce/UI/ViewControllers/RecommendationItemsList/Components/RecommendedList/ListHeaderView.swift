@@ -8,9 +8,8 @@
 import UIKit
 
 class ListHeaderView: UICollectionReusableView {
+    @IBOutlet private weak var label: UILabel!
 
-    @IBOutlet weak var label: UILabel!
-    
     func update(title: String) {
         self.label.text = title
     }

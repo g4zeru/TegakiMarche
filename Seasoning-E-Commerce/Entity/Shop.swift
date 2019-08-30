@@ -5,8 +5,8 @@
 //  Created by iniad on 2019/07/08.
 //
 
-import Foundation
 import Ballcap
+import Foundation
 
 extension FirebaseDatastore {
     final class Shop: Object {
@@ -16,4 +16,3 @@ extension FirebaseDatastore {
         let ownerID: String = .init()
     }
 }
-
