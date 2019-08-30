@@ -5,13 +5,14 @@
 //  Created by iniad on 2019/08/20.
 //
 
-import Foundation
 import FirebaseAuth
+import Foundation
 import GoogleSignIn
 
 class AuthenticationController: NSObject, GIDSignInDelegate {
-    weak var delegate: FirebaseAuthencationDelegate? = nil
+    weak var delegate: FirebaseAuthencationDelegate?
     static let sharedInstance = AuthenticationController()
+     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             self.delegate?.error(case: .signIn(error))
@@ -21,7 +22,7 @@ class AuthenticationController: NSObject, GIDSignInDelegate {
         let credencial = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         Auth.auth().signIn(with: credencial, completion: resultCallback())
     }
-    
+
     private func resultCallback() -> AuthDataResultCallback {
         return { [weak self] result, error in
             if let error = error {
@@ -36,7 +37,7 @@ enum FirebaseAuthencationError {
     case signIn(Error)
 }
 
-protocol FirebaseAuthencationDelegate: class {
-    func finished() -> Void
-    func error(case: FirebaseAuthencationError) -> Void
+protocol FirebaseAuthencationDelegate: AnyObject {
+    func finished()
+    func error(case: FirebaseAuthencationError)
 }

@@ -18,11 +18,11 @@ class RecommendedListCell: UICollectionViewCell {
     @IBOutlet private weak var shareButton: UIButton!
     @IBOutlet private weak var purchaseButton: UIButton!
     @IBOutlet private weak var purchaseButtonOverlayView: UIView!
-    
+
     class var cellHeightRatio: CGFloat {
-        return 26/18
+        return 26 / 18
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.masksToBounds = false
@@ -31,38 +31,43 @@ class RecommendedListCell: UICollectionViewCell {
         self.layer.shadowOpacity = 0.2
         self.overlayView.layer.cornerRadius = 10
         self.overlayView.layer.masksToBounds = true
-        self.optionsView.layer.cornerRadius = self.optionsView.frame.height/2
-        self.purchaseButtonOverlayView.layer.cornerRadius = self.purchaseButtonOverlayView.frame.height/2
+        self.optionsView.layer.cornerRadius = self.optionsView.frame.height / 2
+        self.purchaseButtonOverlayView.layer.cornerRadius = self.purchaseButtonOverlayView.frame.height / 2
     }
     
-    func update(item: FirebaseDatastore.Item) {        self.updateTitleText(text: item.title)
+    func update(item: FirebaseDatastore.Item) {        
+        self.updateTitleText(text: item.title)
         self.updateSubtitleText(text: item.desc)
         //self.rateLabel.text = String(item.rate)
         self.purchaseButton.setTitle("¥\(item.price.separatedByThreeDigitsWithComma)", for: .normal)
     }
-    
+
     private func updateTitleText(text: String) {
         let titleAttributes: [NSAttributedString.Key: Any] = {
             let style = NSMutableParagraphStyle.generate(alignment: .left, lineSpacing: 5)
-            return NSAttributedString.generate(foregroundColor: UIColor.customBlack,
-                                               backgroundColor: UIColor.clear,
-                                               font: UIFont.hiraginoW6(size: 16),
-                                               paragraphStyle: style)
+            return NSAttributedString.generate(
+                foregroundColor: UIColor.customBlack,
+                backgroundColor: UIColor.clear,
+                font: UIFont.hiraginoW6(size: 16),
+                paragraphStyle: style
+            )
         }()
-        
+
         self.titleLabel.attributedText = NSAttributedString(string: text, attributes: titleAttributes)
     }
-    
+
     private func updateSubtitleText(text: String) {
         let subtitleAttributes: [NSAttributedString.Key: Any] = {
             let style = NSMutableParagraphStyle.generate(alignment: .left)
-            let attributes = NSAttributedString.generate(foregroundColor: UIColor.customGray,
-                                                         backgroundColor: UIColor.clear,
-                                                         font: UIFont.hiraginoW6(size: 14),
-                                                         paragraphStyle: style)
+            let attributes = NSAttributedString.generate(
+                foregroundColor: UIColor.customGray,
+                backgroundColor: UIColor.clear,
+                font: UIFont.hiraginoW6(size: 14),
+                paragraphStyle: style
+            )
             return attributes
         }()
-        
+
         self.subtitleLabel.attributedText = NSAttributedString(string: text, attributes: subtitleAttributes)
     }
 }

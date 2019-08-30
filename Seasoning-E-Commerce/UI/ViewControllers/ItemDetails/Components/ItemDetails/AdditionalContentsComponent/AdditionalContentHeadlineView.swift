@@ -5,8 +5,8 @@
 //  Created by iniad on 2019/08/16.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class AdditionalContentHeadlineView: UIView {
     let label: UILabel = {
@@ -16,10 +16,11 @@ class AdditionalContentHeadlineView: UIView {
         view.textColor = UIColor.darkGray
         return view
     }()
+
     init(text: String, frame: CGRect = .zero) {
         super.init(frame: frame)
         self.addSubview(self.label)
-        self.label.snp.makeConstraints { (maker) in
+        self.label.snp.makeConstraints { maker in
             maker.top.equalToSuperview().offset(20)
             maker.leading.equalToSuperview().offset(10)
             maker.trailing.equalToSuperview().offset(-10)
@@ -28,7 +29,7 @@ class AdditionalContentHeadlineView: UIView {
         }
         self.label.text = text
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -13,11 +13,11 @@ class HotRankingCell: UICollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var likeButton: UIButton!
-    
+
     class var cellHeightRatio: CGFloat {
-        return 222/166
+        return 222 / 166
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.masksToBounds = false
@@ -27,19 +27,19 @@ class HotRankingCell: UICollectionViewCell {
         overlayView.layer.masksToBounds = true
         overlayView.layer.cornerRadius = 10
     }
-    
+
     func update(item: FirebaseDatastore.Item) {
-        updateTitleLabel(text: item.title)
-        self.priceLabel.text = "¥\(item.price)"
     }
 
     private func updateTitleLabel(text: String) {
         let titleAttributes: [NSAttributedString.Key: Any] = {
             let style = NSMutableParagraphStyle.generate(alignment: .left, lineSpacing: 5)
-            return NSAttributedString.generate(foregroundColor: UIColor.customBlack,
-                                               backgroundColor: UIColor.clear,
-                                               font: UIFont.hiraginoW6(size: 12),
-                                               paragraphStyle: style)
+            return NSAttributedString.generate(
+                foregroundColor: UIColor.customBlack,
+                backgroundColor: UIColor.clear,
+                font: UIFont.hiraginoW6(size: 12),
+                paragraphStyle: style
+            )
         }()
         self.titleLabel.attributedText = NSAttributedString(string: text, attributes: titleAttributes)
     }

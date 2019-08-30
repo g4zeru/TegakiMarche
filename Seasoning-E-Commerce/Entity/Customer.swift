@@ -5,17 +5,17 @@
 //  Created by iniad on 2019/07/07.
 //
 
-import Foundation
+import Ballcap
 import FirebaseFirestore
 import FirebaseStorage
-import Ballcap
+import Foundation
 
 extension FirebaseDatastore {
     @objcMembers
     final class User: Decodable, Modelable {
         dynamic var name: String = .init()
         dynamic var isBanned: Bool = false
-        dynamic var email: String? = nil
+        dynamic var email: String?
     }
 }
 
