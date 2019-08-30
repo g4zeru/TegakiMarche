@@ -11,7 +11,7 @@ extension UIFont {
     class func hiraginoW3(size: CGFloat) -> UIFont {
         return UIFont(name: "HiraginoSans-W3", size: size)!
     }
-    
+
     class func hiraginoW6(size: CGFloat) -> UIFont {
         return UIFont(name: "HiraginoSans-W6", size: size)!
     }

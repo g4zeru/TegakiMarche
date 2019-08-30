@@ -8,7 +8,6 @@
 import UIKit
 
 class ItemDetailsViewController: UIViewController {
-    
     enum AdditionalContent {
         case headline(String)
         case subHeadline(String)
@@ -16,7 +15,7 @@ class ItemDetailsViewController: UIViewController {
         case image(URL)
         case button
     }
-    
+
     @IBOutlet private weak var contentImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
@@ -28,9 +27,9 @@ class ItemDetailsViewController: UIViewController {
     @IBOutlet private weak var purchaseButton: UIButton!
     @IBOutlet private weak var purchaseButtonOverlayView: UIView!
     @IBOutlet private weak var additionalContentsStackView: UIStackView!
-    
+
     let item: Item
-    
+
     var additionalContents: [AdditionalContent] = {
         var content = [AdditionalContent]()
         content.append(.headline("おすすめの食べ方"))
@@ -46,23 +45,23 @@ class ItemDetailsViewController: UIViewController {
         content.append(.button)
         return content
     }()
-    
+
     var paragraphStyle: NSMutableParagraphStyle {
         let style = NSMutableParagraphStyle()
         style.alignment = .center
         style.lineSpacing = 5
         return style
     }
-    
+
     init(item: Item) {
         self.item = item
         super.init(nibName: "ItemDetailsViewController", bundle: Bundle.main)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
-    
+
     override func loadView() {
         super.loadView()
         self.purchaseButtonOverlayView.layer.cornerRadius = 10
@@ -71,18 +70,18 @@ class ItemDetailsViewController: UIViewController {
         self.purchaseButtonOverlayView.layer.shadowRadius = 3
         self.purchaseButtonOverlayView.layer.shadowOpacity = 0.3
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateContents()
         self.updateAdditionalContents(contents: self.additionalContents)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.optionsWrapView.layer.cornerRadius = self.optionsWrapView.frame.height / 2
     }
-    
+
     func updateContents() {
         self.titleLabel.attributedText = NSAttributedString(string: item.title, attributes: attributes(fontSize: 20, lineSpacing: 10, isBold: true))
         self.descriptionLabel.attributedText = NSAttributedString(string: item.description, attributes: attributes(fontSize: 15, lineSpacing: 12))
@@ -90,37 +89,41 @@ class ItemDetailsViewController: UIViewController {
         self.rateLabel.text = String(item.rate)
         self.contentImageView.setImage(url: item.image)
     }
-    
+
     func updateAdditionalContents(contents: [AdditionalContent]) {
         self.removeAllAdditionalContents()
-        contents.forEach { (content) in
+        contents.forEach { content in
             self.additionalContentsStackView.addArrangedSubview(generateAdditionalContentView(content: content))
         }
     }
-    
+
     func removeAllAdditionalContents() {
-        self.additionalContentsStackView.arrangedSubviews.forEach { [weak self] (subview) in
+        self.additionalContentsStackView.arrangedSubviews.forEach { [weak self] subview in
             self?.additionalContentsStackView.removeArrangedSubview(subview)
             subview.removeFromSuperview()
         }
     }
-    
+
     func generateAdditionalContentView(content: AdditionalContent) -> UIView {
         switch content {
         case .image(let image):
             return AdditionalContentImageView(image: image)
+
         case .text(let text):
             return AdditionalContentTextView(text: text)
+
         case .headline(let text):
             return AdditionalContentHeadlineView(text: text)
+
         case .subHeadline(let text):
             return AdditionalContentSubHeadlineView(text: text)
+
         case .button:
             return AdditionalContentPurchaseButtonView()
         }
     }
-    
-    func attributes(fontSize: CGFloat, lineSpacing: CGFloat = 0, isBold: Bool = false,  alignment: NSTextAlignment = .left, textColor: UIColor = .darkGray, backgroundColor: UIColor = .clear) -> [NSAttributedString.Key: Any] {
+
+    func attributes(fontSize: CGFloat, lineSpacing: CGFloat = 0, isBold: Bool = false, alignment: NSTextAlignment = .left, textColor: UIColor = .darkGray, backgroundColor: UIColor = .clear) -> [NSAttributedString.Key: Any] {
         var attributes = [NSAttributedString.Key: Any]()
         let paragraphStyle: NSMutableParagraphStyle = {
             let style = NSMutableParagraphStyle()

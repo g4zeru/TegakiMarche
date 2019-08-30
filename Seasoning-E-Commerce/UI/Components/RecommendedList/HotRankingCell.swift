@@ -13,11 +13,11 @@ class HotRankingCell: UICollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var likeButton: UIButton!
-    
+
     class var cellHeightRatio: CGFloat {
-        return 222/166
+        return 222 / 166
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.masksToBounds = false
@@ -27,7 +27,7 @@ class HotRankingCell: UICollectionViewCell {
         overlayView.layer.masksToBounds = true
         overlayView.layer.cornerRadius = 10
     }
-    
+
     func update(item: Item) {
         updateTitleLabel(text: item.title)
         self.thumbnailImageView.setImage(url: item.image)

@@ -12,11 +12,11 @@ class ItemCompactListCell: UICollectionViewCell {
     @IBOutlet private weak var thumbnailImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subtitleLabel: UILabel!
-    
+
     class var cellHeightRatio: CGFloat {
-        return 350/218
+        return 350 / 218
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.masksToBounds = false
@@ -26,7 +26,7 @@ class ItemCompactListCell: UICollectionViewCell {
         self.overlayView.layer.masksToBounds = true
         self.overlayView.layer.cornerRadius = 10
     }
-    
+
     func update(title: String, price: Int, image: UIImage) {
         self.thumbnailImageView.image = image
         self.titleLabel.text = title

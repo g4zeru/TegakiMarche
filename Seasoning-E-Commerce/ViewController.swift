@@ -5,8 +5,8 @@
 //  Created by iniad on 2019/08/15.
 //
 
-import UIKit
 import FirebaseAuth
+import UIKit
 
 class ViewController: UIViewController {
     override func loadView() {
