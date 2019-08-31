@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UINavigationController(rootViewController: ViewController())
         window?.makeKeyAndVisible()
         FirebaseApp.configure()
-        BallcapApp.configure(FirebaseDatastore.standardDatastore)
+        BallcapApp.configure(Firebase.standardDatastore)
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = AuthenticationController.sharedInstance
         return true

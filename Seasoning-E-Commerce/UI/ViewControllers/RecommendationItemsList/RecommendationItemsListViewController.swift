@@ -9,8 +9,8 @@ import SnapKit
 import UIKit
 
 class RecommendationItemsListViewController: UIViewController {
-    var recommendationItems: [FirebaseDatastore.Item] = []
-    var hotrankingItems: [FirebaseDatastore.Item] = []
+    var recommendationItems: [Firebase.Item] = []
+    var hotrankingItems: [Firebase.Item] = []
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

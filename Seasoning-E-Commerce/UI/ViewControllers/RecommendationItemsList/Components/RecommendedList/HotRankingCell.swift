@@ -28,7 +28,7 @@ class HotRankingCell: UICollectionViewCell {
         overlayView.layer.cornerRadius = 10
     }
 
-    func update(item: FirebaseDatastore.Item) {
+    func update(item: Firebase.Item) {
     }
 
     private func updateTitleLabel(text: String) {
