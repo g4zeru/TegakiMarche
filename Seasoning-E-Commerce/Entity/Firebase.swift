@@ -59,6 +59,42 @@ extension Reactive where Base: FirestoreDocumentModel {
             return Disposables.create()
         }
     }
+
+    static func collection() -> Observable<[Base]> {
+        return listen(query: Base.collection.order(by: "updatedAt", descending: true))
+    }
+
+    static func listen(query: Query) -> Observable<[Base]> {
+        return Observable.create { observer in
+            query.addSnapshotListener { snapshot, error in
+                if let error = error {
+                    observer.onError(error)
+                    return
+                }
+                guard let snapshot = snapshot else {
+                    observer.onError(FirestoreError.unknown)
+                    return
+                }
+                let results = snapshot.documents.compactMap { document -> Base? in
+                    do {
+                        return try document.makeResult(id: document.documentID)
+                    } catch {
+                        return nil
+                    }
+                }
+                observer.onNext(results)
+            }
+            return Disposables.create()
+        }
+    }
+}
+
+extension Reactive where Base: Query {
+    static func listen<T: FirestoreDocumentModel>() -> Observable<[T]> {
+        return Observable.create({ _ in
+            Disposables.create()
+        })
+    }
 }
 
 /*
