@@ -34,8 +34,8 @@ class RecommendedListCell: UICollectionViewCell {
         self.optionsView.layer.cornerRadius = self.optionsView.frame.height / 2
         self.purchaseButtonOverlayView.layer.cornerRadius = self.purchaseButtonOverlayView.frame.height / 2
     }
-    
-    func update(item: FirebaseDatastore.Item) {        
+
+    func update(item: Firebase.Item) {
         self.updateTitleText(text: item.title)
         self.updateSubtitleText(text: item.desc)
         //self.rateLabel.text = String(item.rate)

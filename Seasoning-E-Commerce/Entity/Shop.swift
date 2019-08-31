@@ -8,7 +8,7 @@
 import Ballcap
 import Foundation
 
-extension FirebaseDatastore {
+extension Firebase {
     final class Shop: Object {
         let name: String = .init()
         let description: String = .init()

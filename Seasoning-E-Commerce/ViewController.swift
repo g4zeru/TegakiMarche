@@ -5,12 +5,13 @@
 //  Created by iniad on 2019/08/15.
 //
 
-import Ballcap
 import FirebaseAuth
+import RxCocoa
+import RxSwift
 import UIKit
 
 class ViewController: UIViewController {
-    var datasource: DataSource<Document<FirebaseDatastore.User>>?
+    let disposeBag = DisposeBag()
 
     override func loadView() {
         super.loadView()
@@ -25,17 +26,7 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         if Auth.auth().currentUser == nil {
             self.present(AuthenticationViewController(), animated: true, completion: nil)
+            return
         }
-        Document<FirebaseDatastore.Item>.query
-            .where("isPublished", isEqualTo: true)
-            .order(by: "publishedAt", descending: true)
-            .dataSource()
-            .retrieve(from: { (snapshot, documentSnapshot, done) in
-                let document: Document<FirebaseDatastore.Item> = Document(documentSnapshot.reference)
-                document.get { (item, error) in
-                    print(item)
-                }
-            })
-            .get()
     }
 }

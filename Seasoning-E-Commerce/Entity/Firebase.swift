@@ -5,19 +5,100 @@
 // GitHub: https://github.com/g4zeru/Seasoning-E-Commerce
 //
 
-import Ballcap
-import Firebase
-import Foundation
+import FirebaseFirestore
+import RxSwift
 
-struct FirebaseDatastore {
+struct Firebase {
     static let baseRef = Firestore.firestore().collection("datastore")
     static var standardDatastore: DocumentReference {
         return baseRef.document("v1")
     }
 }
 
-protocol FirebaseDatastoreQuery: Modelable & Codable {
-    typealias DatastoreQuery = DataSource<Document<Self>>
+struct FirestoreIdentity {
+    let id: String
+    let createdAt: Date
+    var updatedAt: Date
+}
 
-    static var baseQuery: DatastoreQuery.Query { get }
+protocol FirestoreDocumentModel: ReactiveCompatible {
+    static var baseQuery: Query { get }
+    static var collection: CollectionReference { get }
+
+    init (identity: FirestoreIdentity, json: [String: Any]) throws
+}
+
+extension FirestoreDocumentModel {
+    static var collection: CollectionReference {
+        return Firebase.standardDatastore.collection(String(describing: Self.self).lowercased())
+    }
+
+    static func document(id: String) -> DocumentReference {
+        return collection.document(id)
+    }
+}
+
+extension Reactive where Base: FirestoreDocumentModel {
+    static func get(id: String) -> Single<Base> {
+        return Single.create { observer in
+            Base.document(id: id).getDocument(completion: { snapshot, error in
+                if let error = error {
+                    observer(.error(error))
+                    return
+                }
+                guard let snapshot = snapshot else {
+                    observer(.error(FirestoreError.unknown))
+                    return
+                }
+                do {
+                    observer(.success( try snapshot.makeResult(id: snapshot.documentID)))
+                } catch {
+                    observer(.error(error))
+                }
+            })
+            return Disposables.create()
+        }
+    }
+}
+
+/*
+ protocol FirebaseDatastoreQuery: Modelable & Codable {
+ typealias DatastoreQuery = DataSource<Document<Self>>
+
+ static var baseQuery: DatastoreQuery.Query { get }
+ }*/
+
+enum FirestoreError: Error {
+    case unknown
+    case notFoundEntity(documentID: String)
+    case convert(data: Any)
+    case parse(key: String)
+}
+
+extension DocumentSnapshot {
+    func makeResult<T: FirestoreDocumentModel>(id: String) throws -> T {
+        guard exists else {
+            throw FirestoreError.notFoundEntity(documentID: documentID)
+        }
+        let json = data() ?? [:]
+        guard let createdAt = json["createdAt"] as? Timestamp, let updatedAt = json["updatedAt"] as? Timestamp else {
+            throw FirestoreError.notFoundEntity(documentID: documentID)
+        }
+        let identity = FirestoreIdentity(id: documentID, createdAt: createdAt.dateValue(), updatedAt: updatedAt.dateValue())
+        return try T(identity: identity, json: json)
+    }
+}
+
+func parse(key: String, json: [String: Any]) throws -> Any {
+    guard let parsedData = json[key] else {
+        throw FirestoreError.parse(key: key)
+    }
+    return parsedData
+}
+
+func convert<T>(target: Any, _ type: T.Type) throws -> T {
+    guard let castedObject = target as? T else {
+        throw FirestoreError.convert(data: target)
+    }
+    return castedObject
 }
