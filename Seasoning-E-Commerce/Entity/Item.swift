@@ -9,7 +9,7 @@ import FirebaseFirestore
 import FirebaseStorage
 
 extension Firebase {
-    final class Item: FirestoreDocumentModel {
+    struct Item: FirestoreDocumentModel {
         static var baseQuery: Query {
             return collection
                 .whereField("isPublished", isEqualTo: true)

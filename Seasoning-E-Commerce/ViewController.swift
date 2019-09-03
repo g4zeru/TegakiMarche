@@ -28,5 +28,12 @@ class ViewController: UIViewController {
             self.present(AuthenticationViewController(), animated: true, completion: nil)
             return
         }
+        Firebase.Item.rx
+            .listen(documentID: "8W7LKsEqr4gJtaZgT4PE")
+            .asObservable()
+            .subscribe(onNext: { item in
+                print(item)
+            })
+            .disposed(by: disposeBag)
     }
 }

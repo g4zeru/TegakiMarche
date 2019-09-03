@@ -39,28 +39,28 @@ extension FirestoreDocumentModel {
 }
 
 extension Reactive where Base: FirestoreDocumentModel {
-    static func get(id: String) -> Single<Base> {
-        return Single.create { observer in
-            Base.document(id: id).getDocument(completion: { snapshot, error in
+    static func listen(documentID id: String) -> Observable<Base> {
+        return Observable.create { observer in
+            Base.document(id: id).addSnapshotListener { snapshot, error in
                 if let error = error {
-                    observer(.error(error))
+                    observer.onError(error)
                     return
                 }
                 guard let snapshot = snapshot else {
-                    observer(.error(FirestoreError.unknown))
+                    observer.onError(FirestoreError.unknown)
                     return
                 }
                 do {
-                    observer(.success( try snapshot.makeResult(id: snapshot.documentID)))
+                    observer.onNext(try snapshot.makeResult(id: snapshot.documentID))
                 } catch {
-                    observer(.error(error))
+                    observer.onError(error)
                 }
-            })
+            }
             return Disposables.create()
         }
     }
 
-    static func collection() -> Observable<[Base]> {
+    static func listenCollection() -> Observable<[Base]> {
         return listen(query: Base.collection.order(by: "updatedAt", descending: true))
     }
 
