@@ -5,14 +5,39 @@
 //  Created by iniad on 2019/07/08.
 //
 
-import Ballcap
+import FirebaseFirestore
 import Foundation
 
 extension Firebase {
-    final class Shop: Object {
-        let name: String = .init()
-        let description: String = .init()
-        let address: String = .init()
-        let ownerID: String = .init()
+    struct Shop: FirestoreDocumentModel {
+        static var baseQuery: Query {
+            return collection
+                .whereField("isPublished", isEqualTo: true)
+                .whereField("isBanned", isEqualTo: false)
+                .order(by: "publishedAt", descending: true)
+        }
+
+        dynamic var name: String = .init()
+        dynamic var desc: String?
+        dynamic var ownerID: String = .init()
+        dynamic var isPublished: Bool = true
+        dynamic var publishedAt = Date()
+        var items: CollectionReference {
+            return Shop.collection.document(identity.id).collection("item")
+        }
+
+        let identity: FirestoreIdentity
+
+        init(identity: FirestoreIdentity, json: [String: Any]) throws {
+            self.identity = identity
+            self.name = try convert(target: parse(key: "name", json: json), String.self)
+            self.desc = try? convert(target: parse(key: "desc", json: json), String.self)
+            self.ownerID = try convert(target: parse(key: "ownerID", json: json), String.self)
+            self.isPublished = try convert(target: parse(key: "isPublished", json: json), Bool.self)
+            self.publishedAt = try convert(target: parse(key: "publishedAt", json: json), Timestamp.self).dateValue()
+        }
     }
+}
+
+extension Firebase.Shop {
 }

@@ -11,8 +11,7 @@ import FirebaseStorage
 import Foundation
 
 extension Firebase {
-    @objcMembers
-    final class User: FirestoreDocumentModel {
+    struct  User: FirestoreDocumentModel {
         static var baseQuery: Query {
             return Firebase.standardDatastore.collection("user")
         }
@@ -26,16 +25,8 @@ extension Firebase {
         init(identity: FirestoreIdentity, json: [String: Any]) throws {
             self.identity = identity
             self.name = try convert(target: parse(key: "name", json: json), String.self)
+            self.isBanned = try convert(target: parse(key: "isBanned", json: json), Bool.self)
+            self.email = try? convert(target: parse(key: "email", json: json), String.self)
         }
     }
 }
-
-/*
- extension FirebaseDatastore.User: FirebaseDatastoreQuery {
- static var baseQuery: DataSource<Document<FirebaseDatastore.User>>.Query {
- return Document<FirebaseDatastore.User>
- .where("isBanned", isEqualTo: false)
- .order(by: "updatedAt", descending: true)
- }
- }
- */
