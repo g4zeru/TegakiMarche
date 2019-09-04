@@ -28,7 +28,7 @@ class ItemDetailsViewController: UIViewController {
     @IBOutlet private weak var purchaseButtonOverlayView: UIView!
     @IBOutlet private weak var additionalContentsStackView: UIStackView!
 
-    let item: Item
+    let item: Firebase.Item
 
     var additionalContents: [AdditionalContent] = {
         var content = [AdditionalContent]()
@@ -50,7 +50,7 @@ class ItemDetailsViewController: UIViewController {
         return style
     }
 
-    init(item: Item) {
+    init(item: Firebase.Item) {
         self.item = item
         super.init(nibName: "ItemDetailsViewController", bundle: Bundle.main)
     }
@@ -81,10 +81,9 @@ class ItemDetailsViewController: UIViewController {
 
     func updateContents() {
         self.titleLabel.attributedText = NSAttributedString(string: item.title, attributes: attributes(fontSize: 20, lineSpacing: 10, isBold: true))
-        self.descriptionLabel.attributedText = NSAttributedString(string: item.description, attributes: attributes(fontSize: 15, lineSpacing: 12))
+        self.descriptionLabel.attributedText = NSAttributedString(string: item.desc, attributes: attributes(fontSize: 15, lineSpacing: 12))
         self.priceLabel.text = "¥" + item.price.separatedByThreeDigitsWithComma
-        self.rateLabel.text = String(item.rate)
-        self.contentImageView.setImage(url: item.image)
+        //self.rateLabel.text = String(item.rate)
     }
 
     func updateAdditionalContents(contents: [AdditionalContent]) {

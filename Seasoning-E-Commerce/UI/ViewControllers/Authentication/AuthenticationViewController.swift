@@ -7,25 +7,29 @@
 
 import Firebase
 import GoogleSignIn
+import RxCocoa
+import RxSwift
+import SnapKit
 import UIKit
 
-class AuthenticationViewController: UIViewController, GIDSignInUIDelegate {
+class AuthenticationViewController: UIViewController {
     var authStateListener: AuthStateDidChangeListenerHandle?
+    let disposeBag = DisposeBag()
     private let signInWithGoogleButton = GIDSignInButton()
 
     override func loadView() {
         super.loadView()
         self.view.backgroundColor = UIColor.white
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        GIDSignIn.sharedInstance()?.uiDelegate = self
-        GIDSignIn.sharedInstance()?.signIn()
         self.view.addSubview(signInWithGoogleButton)
         signInWithGoogleButton.snp.makeConstraints { maker in
             maker.center.equalToSuperview()
             maker.width.equalTo(200)
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        GIDSignIn.sharedInstance()?.presentingViewController = self
     }
 
     override func viewWillAppear(_ animated: Bool) {

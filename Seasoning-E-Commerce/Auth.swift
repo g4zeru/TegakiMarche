@@ -12,6 +12,7 @@ import GoogleSignIn
 class AuthenticationController: NSObject, GIDSignInDelegate {
     weak var delegate: FirebaseAuthencationDelegate?
     static let sharedInstance = AuthenticationController()
+
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             self.delegate?.error(case: .signIn(error))
