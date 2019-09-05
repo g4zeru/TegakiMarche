@@ -79,6 +79,7 @@ extension Reactive where Base: FirestoreDocumentModel {
                     do {
                         return try document.makeResult(id: document.documentID)
                     } catch {
+                        observer.onError(error)
                         return nil
                     }
                 }

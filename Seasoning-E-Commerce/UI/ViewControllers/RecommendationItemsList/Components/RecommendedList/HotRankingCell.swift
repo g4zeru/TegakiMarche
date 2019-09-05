@@ -29,6 +29,8 @@ class HotRankingCell: UICollectionViewCell {
     }
 
     func update(item: Firebase.Item) {
+        updateTitleLabel(text: item.title)
+        priceLabel.text = String(item.price)
     }
 
     private func updateTitleLabel(text: String) {
