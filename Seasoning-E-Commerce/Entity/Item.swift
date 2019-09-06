@@ -10,8 +10,8 @@ import FirebaseStorage
 
 extension Firebase {
     struct Item: FirestoreDocumentModel {
-        static var baseQuery: Query {
-            return collection
+        static var baseQuery: ObservableFirebaseQuery<Item> {
+            return ObservableFirebaseQuery<Item>(query: collection)
                 .whereField("isPublished", isEqualTo: true)
                 .order(by: "publishedAt", descending: true)
         }

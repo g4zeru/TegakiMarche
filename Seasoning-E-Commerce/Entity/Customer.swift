@@ -12,8 +12,8 @@ import Foundation
 
 extension Firebase {
     struct  User: FirestoreDocumentModel {
-        static var baseQuery: Query {
-            return Firebase.standardDatastore.collection("user")
+        static var baseQuery: ObservableFirebaseQuery<Firebase.User> {
+            return ObservableFirebaseQuery<Firebase.User>(query: collection)
         }
 
         dynamic var name: String = .init()
