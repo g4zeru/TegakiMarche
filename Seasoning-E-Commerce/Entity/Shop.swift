@@ -10,8 +10,8 @@ import Foundation
 
 extension Firebase {
     struct Shop: FirestoreDocumentModel {
-        static var baseQuery: Query {
-            return collection
+        static var baseQuery: ObservableFirebaseQuery<Shop> {
+            return ObservableFirebaseQuery<Shop>(query: collection)
                 .whereField("isPublished", isEqualTo: true)
                 .whereField("isBanned", isEqualTo: false)
                 .order(by: "publishedAt", descending: true)

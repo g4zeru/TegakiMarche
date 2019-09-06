@@ -22,7 +22,7 @@ struct FirestoreIdentity {
 }
 
 protocol FirestoreDocumentModel: ReactiveCompatible {
-    static var baseQuery: Query { get }
+    static var baseQuery: ObservableFirebaseQuery<Self> { get }
     static var collection: CollectionReference { get }
 
     init (identity: FirestoreIdentity, json: [String: Any]) throws
