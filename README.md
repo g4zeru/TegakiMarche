@@ -1,4 +1,4 @@
-# Seasoning-E-Commerce
+# TegakiMarche
 
 ## セットアップの仕方
 1. xcodegenのインストール https://github.com/yonaskolb/XcodeGen
