@@ -15,13 +15,13 @@ extension Firebase {
                 .order(by: "publishedAt", descending: true)
         }
 
-        dynamic var title: String = ""
-        dynamic var desc: String = ""
-        dynamic var price: Int = 0
-        dynamic var isPublished: Bool = true
-        dynamic var publishedAt = Date()
-        dynamic var imagePath: String? = ""
-        dynamic var images: [String: Any] = [:]
+        let title: String
+        let desc: String
+        let price: Int
+        let isPublished: Bool
+        let publishedAt: Date
+        let imagePath: String?
+        let images: [String: Any]
 
         let identity: FirestoreIdentity
 
@@ -31,6 +31,9 @@ extension Firebase {
             self.desc = (try? convert(target: parse(key: "desc", json: json), String.self)) ?? ""
             self.price = try convert(target: parse(key: "price", json: json), Int.self)
             self.publishedAt = try convert(target: parse(key: "publishedAt", json: json), Timestamp.self).dateValue()
+            self.isPublished = try convert(target: parse(key: "isPublished", json: json), Bool.self)
+            self.images = [:]
+            self.imagePath = nil
         }
     }
 }

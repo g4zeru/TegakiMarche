@@ -17,11 +17,12 @@ extension Firebase {
                 .order(by: "publishedAt", descending: true)
         }
 
-        dynamic var name: String = .init()
-        dynamic var desc: String?
-        dynamic var ownerID: String = .init()
-        dynamic var isPublished: Bool = true
-        dynamic var publishedAt = Date()
+        let name: String
+        let desc: String?
+        let ownerID: String
+        let isPublished: Bool
+        let publishedAt: Date
+        
         var items: CollectionReference {
             return Shop.collection.document(identity.id).collection("item")
         }

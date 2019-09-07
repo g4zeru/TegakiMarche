@@ -14,9 +14,9 @@ extension Firebase {
             return ObservableFirebaseQuery<Firebase.User>(query: collection)
         }
 
-        dynamic var name: String = .init()
-        dynamic var isBanned: Bool = false
-        dynamic var email: String?
+        let name: String
+        let isBanned: Bool
+        let email: String?
 
         let identity: FirestoreIdentity
 
