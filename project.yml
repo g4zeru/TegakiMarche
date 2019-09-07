@@ -9,9 +9,6 @@ targets:
     type: application
     platform: iOS
     sources: TegakiMarche
-    prebuildScripts:
-     - name: Run sh
-       script: "sh ${SRCROOT}/Build.sh"
     settings:
       CURRENT_PROJECT_VERSION: "1"
       INFOPLIST_FILE: TegakiMarche/info.plist
