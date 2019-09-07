@@ -61,6 +61,13 @@ class RecommendationItemsListViewController: UIViewController, RecommendationIte
                 self?.collectionView.reloadSections(IndexSet(arrayLiteral: section))
             })
             .disposed(by: disposeBag)
+        
+        rx.sentMessage(#selector(viewDidAppear(_:)))
+            .subscribe(onNext: { [weak self] _ in
+                self?.store.refleshRecommendedItem()
+                self?.store.refleshHotrankingItem()
+            })
+            .disposed(by: disposeBag)
     }
 
     func showErrorMessage(text: String) {

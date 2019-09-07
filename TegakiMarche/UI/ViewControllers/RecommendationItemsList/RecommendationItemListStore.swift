@@ -17,9 +17,13 @@ protocol RecommendationItemsListStore {
     func selectRecommendedItem(index: Int)
     func selectHotRankingItem(index: Int)
     func selectShopDetail(shop: Firebase.Shop)
+    
+    func refleshRecommendedItem()
+    func refleshHotrankingItem()
 }
 
 class RecommendationItemsListStoreImpl: RecommendationItemsListStore {
+    
     var hotrankingItem: [Firebase.Item] {
         return hotrankingItemRelay.value
     }
@@ -90,5 +94,13 @@ class RecommendationItemsListStoreImpl: RecommendationItemsListStore {
     func selectShopDetail(shop: Firebase.Shop) {
         // Todo: 未実装
         return
+    }
+    
+    func refleshRecommendedItem() {
+        viewModel.input.refleshRecommendedItem.accept(())
+    }
+    
+    func refleshHotrankingItem() {
+        viewModel.input.refleshHotrankingItem.accept(())
     }
 }
