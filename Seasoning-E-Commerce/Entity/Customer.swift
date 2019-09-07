@@ -5,9 +5,7 @@
 //  Created by iniad on 2019/07/07.
 //
 
-import Ballcap
 import FirebaseFirestore
-import FirebaseStorage
 import Foundation
 
 extension Firebase {

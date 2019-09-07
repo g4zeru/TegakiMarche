@@ -6,7 +6,6 @@
 //
 
 import FirebaseFirestore
-import FirebaseStorage
 
 extension Firebase {
     struct Item: FirestoreDocumentModel {

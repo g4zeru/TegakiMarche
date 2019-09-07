@@ -47,12 +47,14 @@ class RecommendationItemsListViewModelImpl: RecommendationItemListInput, Recomme
     private let disposeBag = DisposeBag()
 
     init() {
-        Firebase.Item.rx
-            .listen(query: Firebase.Item.baseQuery.limit(to: 4))
+        Firebase.Item.baseQuery
+            .limit(to: 4)
+            .get()
             .bind(to: recommendedItemSubject)
             .disposed(by: disposeBag)
-        Firebase.Item.rx
-            .listen(query: Firebase.Item.baseQuery.limit(to: 10))
+        Firebase.Item.baseQuery
+            .limit(to: 2)
+            .get()
             .bind(to: hotrankingItemSubject)
             .disposed(by: disposeBag)
     }

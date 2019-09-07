@@ -6,7 +6,6 @@
 //  Copyright © 2019 g4zeru. All rights reserved.
 //
 
-import Ballcap
 import Firebase
 import GoogleSignIn
 import UIKit
