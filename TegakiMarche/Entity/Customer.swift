@@ -14,17 +14,17 @@ extension Firebase {
             return ObservableFirebaseQuery<Firebase.User>(query: collection)
         }
 
-        dynamic var name: String = .init()
-        dynamic var isBanned: Bool = false
-        dynamic var email: String?
+        let name: String
+        let isBanned: Bool
+        let email: String?
 
         let identity: FirestoreIdentity
 
         init(identity: FirestoreIdentity, json: [String: Any]) throws {
             self.identity = identity
-            self.name = try convert(target: parse(key: "name", json: json), String.self)
-            self.isBanned = try convert(target: parse(key: "isBanned", json: json), Bool.self)
-            self.email = try? convert(target: parse(key: "email", json: json), String.self)
+            self.name = try convert(target: parse(key: "name", json: json))
+            self.isBanned = try convert(target: parse(key: "isBanned", json: json))
+            self.email = try? convert(target: parse(key: "email", json: json))
         }
     }
 }

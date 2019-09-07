@@ -17,11 +17,12 @@ extension Firebase {
                 .order(by: "publishedAt", descending: true)
         }
 
-        dynamic var name: String = .init()
-        dynamic var desc: String?
-        dynamic var ownerID: String = .init()
-        dynamic var isPublished: Bool = true
-        dynamic var publishedAt = Date()
+        let name: String
+        let desc: String?
+        let ownerID: String
+        let isPublished: Bool
+        let publishedAt: Date
+        
         var items: CollectionReference {
             return Shop.collection.document(identity.id).collection("item")
         }
@@ -30,11 +31,12 @@ extension Firebase {
 
         init(identity: FirestoreIdentity, json: [String: Any]) throws {
             self.identity = identity
-            self.name = try convert(target: parse(key: "name", json: json), String.self)
-            self.desc = try? convert(target: parse(key: "desc", json: json), String.self)
-            self.ownerID = try convert(target: parse(key: "ownerID", json: json), String.self)
-            self.isPublished = try convert(target: parse(key: "isPublished", json: json), Bool.self)
-            self.publishedAt = try convert(target: parse(key: "publishedAt", json: json), Timestamp.self).dateValue()
+            self.name = try convert(target: parse(key: "name", json: json))
+            self.desc = try? convert(target: parse(key: "desc", json: json))
+            self.ownerID = try convert(target: parse(key: "ownerID", json: json))
+            self.isPublished = try convert(target: parse(key: "isPublished", json: json))
+            let timestamp: Timestamp = try convert(target: parse(key: "publishedAt", json: json))
+            self.publishedAt = timestamp.dateValue()
         }
     }
 }

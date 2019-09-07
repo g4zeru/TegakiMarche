@@ -133,7 +133,7 @@ func parse(key: String, json: [String: Any]) throws -> Any {
     return parsedData
 }
 
-func convert<T>(target: Any, _ type: T.Type) throws -> T {
+func convert<T>(target: Any) throws -> T {
     guard let castedObject = target as? T else {
         throw FirestoreError.convert(data: target)
     }
