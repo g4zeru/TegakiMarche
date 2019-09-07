@@ -1,6 +1,6 @@
 //
 // Copyright: © 2019, g4zeru All Rights Reserved.
-// Target: Seasoning-E-Commerce.
+// Target: TegakiMarche.
 // CreatedAt: 3:14.
 // GitHub: https://github.com/g4zeru/Seasoning-E-Commerce
 //
@@ -79,6 +79,7 @@ extension Reactive where Base: FirestoreDocumentModel {
                     do {
                         return try document.makeResult(id: document.documentID)
                     } catch {
+                        observer.onError(error)
                         return nil
                     }
                 }

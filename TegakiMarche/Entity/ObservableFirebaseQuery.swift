@@ -1,6 +1,6 @@
 //
 // Copyright: © 2019, g4zeru All Rights Reserved.
-// Target: Seasoning-E-Commerce.
+// Target: TegakiMarche.
 // CreatedAt: 20:14.
 // GitHub: https://github.com/g4zeru/Seasoning-E-Commerce
 //
@@ -9,8 +9,9 @@ import FirebaseFirestore
 import Foundation
 import RxSwift
 
-struct ObservableFirebaseQuery<Model: FirestoreDocumentModel> {
+final class ObservableFirebaseQuery<Model: FirestoreDocumentModel> {
     private let query: Query
+
     init(query: Query) {
         self.query = query
     }
@@ -18,6 +19,30 @@ struct ObservableFirebaseQuery<Model: FirestoreDocumentModel> {
     func listen() -> Observable<[Model]> {
         return Observable<[Model]>.create { observer in
             self.query.addSnapshotListener { snapshot, error in
+                if let error = error {
+                    observer.onError(error)
+                    return
+                }
+                guard let snapshot = snapshot else {
+                    observer.onError(FirestoreError.unknown)
+                    return
+                }
+                let results = snapshot.documents.compactMap { document -> Model? in
+                    do {
+                        return try document.makeResult(id: document.documentID)
+                    } catch {
+                        return nil
+                    }
+                }
+                observer.onNext(results)
+            }
+            return Disposables.create()
+        }
+    }
+
+    func get() -> Observable<[Model]> {
+        return Observable<[Model]>.create { observer in
+            self.query.getDocuments { snapshot, error in
                 if let error = error {
                     observer.onError(error)
                     return

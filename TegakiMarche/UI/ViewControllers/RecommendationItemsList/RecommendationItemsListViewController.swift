@@ -1,16 +1,20 @@
 //
 //  RecommendationItemsListViewController.swift
-//  Seasoning-E-Commerce
+//  TegakiMarche
 //
 //  Created by iniad on 2019/08/15.
 //
 
+import RxSwift
 import SnapKit
 import UIKit
 
-class RecommendationItemsListViewController: UIViewController {
-    var recommendationItems: [Firebase.Item] = []
-    var hotrankingItems: [Firebase.Item] = []
+protocol RecommendationItemsListView {
+    func showErrorMessage(text: String)
+}
+
+class RecommendationItemsListViewController: UIViewController, RecommendationItemsListView {
+    var store: RecommendationItemsListStoreImpl!
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -23,24 +27,58 @@ class RecommendationItemsListViewController: UIViewController {
         view.register(UINib(nibName: "ListHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "listheader")
         return view
     }()
+    private let errorView = ErrorMessageView()
+
+    let disposeBag = DisposeBag()
 
     override func loadView() {
         let backView = UIView(frame: UIScreen.main.bounds)
         backView.backgroundColor = UIColor.white
         self.view = backView
         self.view.addSubview(self.collectionView)
+        self.view.addSubview(self.errorView)
         self.collectionView.snp.makeConstraints { maker in
             maker.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             maker.leading.equalToSuperview()
             maker.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
             maker.trailing.equalToSuperview()
         }
+        self.errorView.snp.makeConstraints { maker in
+            maker.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+            maker.leading.equalToSuperview()
+            maker.trailing.equalToSuperview()
+            maker.height.equalTo(50)
+        }
+        self.errorView.isHidden = true
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        self.store?.shouldRealoadData
+            .subscribe(onNext: { [weak self] section in
+                self?.collectionView.reloadSections(IndexSet(arrayLiteral: section))
+            })
+            .disposed(by: disposeBag)
+        
+        rx.sentMessage(#selector(viewDidAppear(_:)))
+            .subscribe(onNext: { [weak self] _ in
+                self?.store.refleshRecommendedItem()
+                self?.store.refleshHotrankingItem()
+            })
+            .disposed(by: disposeBag)
+    }
+
+    func showErrorMessage(text: String) {
+        guard self.errorView.isHidden else {
+            return
+        }
+        self.errorView.label.text = text
+        self.errorView.isHidden = false
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            self.errorView.isHidden = true
+        }
     }
 }
 
@@ -50,9 +88,9 @@ extension RecommendationItemsListViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return recommendationItems.count
+            return store.recommendedItem.count
         } else {
-            return hotrankingItems.count
+            return store.hotrankingItem.count
         }
     }
 
@@ -61,13 +99,13 @@ extension RecommendationItemsListViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendedlist", for: indexPath) as? RecommendedListCell else {
                 fatalError()
             }
-            cell.update(item: recommendationItems[indexPath.item])
+            cell.update(item: store.recommendedItem[indexPath.item])
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hotranking", for: indexPath) as? HotRankingCell else {
                 fatalError()
             }
-            cell.update(item: hotrankingItems[indexPath.item])
+            cell.update(item: store.hotrankingItem[indexPath.item])
             return cell
         }
     }
@@ -116,5 +154,15 @@ extension RecommendationItemsListViewController: UICollectionViewDelegateFlowLay
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 30)
+    }
+}
+
+extension RecommendationItemsListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            self.store?.selectRecommendedItem(index: indexPath.item)
+        } else {
+            self.store?.selectHotRankingItem(index: indexPath.item)
+        }
     }
 }

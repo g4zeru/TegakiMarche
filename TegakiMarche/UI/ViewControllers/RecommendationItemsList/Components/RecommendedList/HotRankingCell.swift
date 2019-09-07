@@ -1,6 +1,6 @@
 //
 //  HotRankingCell.swift
-//  Seasoning-E-Commerce
+//  TegakiMarche
 //
 //  Created by iniad on 2019/08/14.
 //
@@ -29,6 +29,8 @@ class HotRankingCell: UICollectionViewCell {
     }
 
     func update(item: Firebase.Item) {
+        updateTitleLabel(text: item.title)
+        priceLabel.text = String(item.price)
     }
 
     private func updateTitleLabel(text: String) {

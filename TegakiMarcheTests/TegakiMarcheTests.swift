@@ -1,15 +1,14 @@
 //
-//  Seasoning_E_CommerceTests.swift
-//  Seasoning-E-CommerceTests
+//  TegakiMarcheTests.swift
+//  TegakiMarcheTests
 //
-//  Created by iniad on 2019/07/04.
-//  Copyright © 2019 g4zeru. All rights reserved.
+//  Created by iniad on 2019/09/07.
 //
 
-@testable import Seasoning_E_Commerce
 import XCTest
 
-class SeasoningECommerceTests: XCTestCase {
+class TegakiMarcheTests: XCTestCase {
+
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -29,4 +28,5 @@ class SeasoningECommerceTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+
 }

@@ -1,12 +1,11 @@
 //
 //  Item.swift
-//  Seasoning-E-Commerce
+//  TegakiMarche
 //
 //  Created by iniad on 2019/07/08.
 //
 
 import FirebaseFirestore
-import FirebaseStorage
 
 extension Firebase {
     struct Item: FirestoreDocumentModel {
