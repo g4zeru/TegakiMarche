@@ -1,6 +1,6 @@
 //
 //  AdditionalContentImageView.swift
-//  Seasoning-E-Commerce
+//  TegakiMarche
 //
 //  Created by iniad on 2019/08/15.
 //

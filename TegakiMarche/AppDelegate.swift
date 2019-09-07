@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Seasoning-E-Commerce
+//  TegakiMarche
 //
 //  Created by iniad on 2019/07/04.
 //  Copyright © 2019 g4zeru. All rights reserved.
