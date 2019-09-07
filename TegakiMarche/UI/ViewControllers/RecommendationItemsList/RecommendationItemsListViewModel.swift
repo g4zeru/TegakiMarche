@@ -11,6 +11,8 @@ import RxRelay
 import RxSwift
 
 protocol RecommendationItemListInput {
+    var refleshRecommendedItem: PublishRelay<Void> { get }
+    var refleshHotrankingItem: PublishRelay<Void> { get }
 }
 
 protocol RecommendationItemListOutput {
@@ -24,7 +26,11 @@ protocol RecommendationItemListViewModel {
     var output: RecommendationItemListOutput { get }
 }
 
-class RecommendationItemsListViewModelImpl: RecommendationItemListInput, RecommendationItemListOutput, RecommendationItemListViewModel {
+final class RecommendationItemsListViewModelImpl: RecommendationItemListInput, RecommendationItemListOutput, RecommendationItemListViewModel {
+    let refleshRecommendedItem: PublishRelay<Void> = PublishRelay()
+    
+    let refleshHotrankingItem: PublishRelay<Void> = PublishRelay()
+    
     var recommendedItem: Observable<[Firebase.Item]> {
         return recommendedItemSubject
     }
@@ -46,16 +52,26 @@ class RecommendationItemsListViewModelImpl: RecommendationItemListInput, Recomme
 
     private let disposeBag = DisposeBag()
 
-    init() {
-        Firebase.Item.baseQuery
-            .limit(to: 4)
-            .get()
-            .bind(to: recommendedItemSubject)
+    init(recommendedItemQuery: ObservableFirebaseQuery<Firebase.Item>,
+         hotrankingItemQuery: ObservableFirebaseQuery<Firebase.Item>) {
+        refleshRecommendedItem
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                recommendedItemQuery
+                    .get()
+                    .bind(to: self.recommendedItemSubject)
+                    .disposed(by: self.disposeBag)
+            })
             .disposed(by: disposeBag)
-        Firebase.Item.baseQuery
-            .limit(to: 2)
-            .get()
-            .bind(to: hotrankingItemSubject)
+        
+        refleshHotrankingItem
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                hotrankingItemQuery
+                    .get()
+                    .bind(to: self.hotrankingItemSubject)
+                    .disposed(by: self.disposeBag)
+            })
             .disposed(by: disposeBag)
     }
 }
