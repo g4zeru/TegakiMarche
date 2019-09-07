@@ -27,11 +27,12 @@ extension Firebase {
 
         init(identity: FirestoreIdentity, json: [String: Any]) throws {
             self.identity = identity
-            self.title = try convert(target: parse(key: "title", json: json), String.self)
-            self.desc = (try? convert(target: parse(key: "desc", json: json), String.self)) ?? ""
-            self.price = try convert(target: parse(key: "price", json: json), Int.self)
-            self.publishedAt = try convert(target: parse(key: "publishedAt", json: json), Timestamp.self).dateValue()
-            self.isPublished = try convert(target: parse(key: "isPublished", json: json), Bool.self)
+            self.title = try convert(target: parse(key: "title", json: json))
+            self.desc = (try? convert(target: parse(key: "desc", json: json))) ?? ""
+            self.price = try convert(target: parse(key: "price", json: json))
+            let timestamp: Timestamp = try convert(target: parse(key: "publishedAt", json: json))
+            self.publishedAt = timestamp.dateValue()
+            self.isPublished = try convert(target: parse(key: "isPublished", json: json))
             self.images = [:]
             self.imagePath = nil
         }
