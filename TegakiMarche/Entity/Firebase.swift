@@ -61,7 +61,7 @@ extension Reactive where Base: FirestoreDocumentModel {
     }
 
     static func listenCollection() -> Observable<[Base]> {
-        return listen(query: Base.collection.order(by: "updatedAt", descending: true))
+        return listen(query: Base.collection)
     }
 
     static func listen(query: Query) -> Observable<[Base]> {
