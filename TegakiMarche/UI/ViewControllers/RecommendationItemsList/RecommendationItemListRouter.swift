@@ -24,10 +24,7 @@ class RecommendationItemListRouter {
         let view = RecommendationItemsListViewController()
         let router = RecommendationItemListRouter(view: view)
         let errorInteractor = RecommendationItemListErrorInteractorImpl()
-        let viewModel = RecommendationItemsListViewModelImpl(
-            recommendedItemQuery: Firebase.Item.baseQuery.limit(to: 4),
-            hotrankingItemQuery: Firebase.Item.baseQuery.limit(to: 4)
-        )
+        let viewModel = MockReccomendationItemsListViewModel()
         let store = RecommendationItemsListStoreImpl(view: view,
                                                      router: router,
                                                      viewModel: viewModel,
