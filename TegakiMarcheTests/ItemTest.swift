@@ -11,14 +11,13 @@ import FirebaseFirestore
 
 class FirebaseItemTests: XCTestCase {
     func testShouldInitialize() {
-        let identity: FirestoreIdentity = .init(id: "xxx", createdAt: Date(), updatedAt: Date())
         let json: [String: Any] = ["title":"ttt",
                                    "desc":"ddd",
                                    "publishedAt": Timestamp(date: Date.create(yyyyMMdd: "20170810")!),
                                    "isPublished": true,
                                    "type":"pickup"]
         do {
-            let item = try Firebase.Item(identity: identity, json: json)
+            let item = try Firebase.Item(id: "xxx", timestamps: Timestamps(createdAt: Date(), updatedAt: Date()), json: json)
             XCTAssertTrue(item.publishedAt<Date())
             XCTAssertTrue(item.isPublished)
             XCTAssertTrue(item.type == .pickup)

@@ -17,45 +17,35 @@ extension Firebase {
         }
 
         enum AdditionalContent {
-            private enum ContentType: String {
-                case text
-                case image
-            }
-
             case text(String)
             case image(URL)
         }
-
+        private let uniqueID: String
         let title: String
         let subTitle: String?
         let isPublished: Bool
         let publishedAt: Date
         let thumbnailImagePath: String?
-        let createdAt: Date
-        let updatedAt: Date
-        let id: String
         let type: ContentType
     }
 }
 
 extension Firebase.Item: FirestoreDocumentModel {
-    init(identity: FirestoreIdentity, json: [String: Any]) throws {
-        self.title = try convert(target: parse(key: "title", json: json))
-        self.subTitle = try? convert(target: parse(key: "desc", json: json))
-        let timestamp: Timestamp = try convert(target: parse(key: "publishedAt", json: json))
-        self.publishedAt = timestamp.dateValue()
-        self.isPublished = try convert(target: parse(key: "isPublished", json: json))
-        self.thumbnailImagePath = nil
-        self.createdAt = identity.createdAt
-        self.updatedAt = identity.updatedAt
-        self.id = identity.id
-        self.type = try Firebase.Item.contentType(json: json)
-    }
-    
     static var baseQuery: ObservableFirebaseQuery<Firebase.Item> {
         return ObservableFirebaseQuery<Firebase.Item>(query: collection)
             .whereField("isPublished", isEqualTo: true)
             .order(by: "publishedAt", descending: true)
+    }
+    
+    init(id: String, timestamps: Timestamps, json: [String: Any]) throws {
+        self.uniqueID = id
+        self.title = try convert(target: parse(key: "title", json: json))
+        self.subTitle = try? convert(target: parse(key: "desc", json: json))
+        let publishedAt: Timestamp = try convert(target: parse(key: "publishedAt", json: json))
+        self.publishedAt = publishedAt.dateValue()
+        self.isPublished = try convert(target: parse(key: "isPublished", json: json))
+        self.thumbnailImagePath = nil
+        self.type = try Firebase.Item.contentType(json: json)
     }
     
     static func contentType(json: [String: Any]) throws -> ContentType {
@@ -71,10 +61,16 @@ extension Firebase.Item: FirestoreDocumentModel {
 }
 
 extension Firebase.Item.AdditionalContent: FirestoreDocumentModel {
+    private enum ContentType: String {
+        case text
+        case image
+    }
+    
     static var baseQuery: ObservableFirebaseQuery<Firebase.Item.AdditionalContent> {
         return .init(query: Firebase.Item.collection.document().collection("contents"))
     }
-    init(identity: FirestoreIdentity, json: [String : Any]) throws {
+    
+    init(id: String, timestamps: Timestamps, json: [String: Any]) throws {
         guard let parsedText: String = try? convert(target: parse(key: "type", json: json)) else {
             throw FirestoreError.parse(key: "type")
         }

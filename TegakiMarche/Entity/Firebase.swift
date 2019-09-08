@@ -15,8 +15,7 @@ struct Firebase {
     }
 }
 
-struct FirestoreIdentity {
-    let id: String
+struct Timestamps {
     let createdAt: Date
     var updatedAt: Date
 }
@@ -25,7 +24,7 @@ protocol FirestoreDocumentModel: ReactiveCompatible {
     static var baseQuery: ObservableFirebaseQuery<Self> { get }
     static var collection: CollectionReference { get }
 
-    init (identity: FirestoreIdentity, json: [String: Any]) throws
+    init(id: String, timestamps: Timestamps, json: [String: Any]) throws
 }
 
 extension FirestoreDocumentModel {
@@ -98,13 +97,6 @@ extension Reactive where Base: Query {
     }
 }
 
-/*
- protocol FirebaseDatastoreQuery: Modelable & Codable {
- typealias DatastoreQuery = DataSource<Document<Self>>
-
- static var baseQuery: DatastoreQuery.Query { get }
- }*/
-
 enum FirestoreError: Error {
     case unknown
     case notFoundEntity(documentID: String)
@@ -121,8 +113,8 @@ extension DocumentSnapshot {
         guard let createdAt = json["createdAt"] as? Timestamp, let updatedAt = json["updatedAt"] as? Timestamp else {
             throw FirestoreError.notFoundEntity(documentID: documentID)
         }
-        let identity = FirestoreIdentity(id: documentID, createdAt: createdAt.dateValue(), updatedAt: updatedAt.dateValue())
-        return try T(identity: identity, json: json)
+        let timestamps = Timestamps(createdAt: createdAt.dateValue(), updatedAt: updatedAt.dateValue())
+        return try T(id: documentID, timestamps: timestamps, json: json)
     }
 }
 
