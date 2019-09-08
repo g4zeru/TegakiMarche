@@ -5,7 +5,6 @@
 //  Created by iniad on 2019/08/15.
 //
 
-import SnapKit
 import UIKit
 
 class AdditionalContentSubHeadlineView: UIView {

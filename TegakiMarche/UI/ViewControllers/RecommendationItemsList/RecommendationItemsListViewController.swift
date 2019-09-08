@@ -6,8 +6,9 @@
 //
 
 import RxSwift
-import SnapKit
 import UIKit
+import Instantiate
+import InstantiateStandard
 
 protocol RecommendationItemsListView {
     func showErrorMessage(text: String)
@@ -22,9 +23,10 @@ class RecommendationItemsListViewController: UIViewController, RecommendationIte
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = UIColor.clear
         view.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        view.register(UINib(nibName: "RecommendedListCell", bundle: nil), forCellWithReuseIdentifier: "recommendedlist")
-        view.register(UINib(nibName: "HotRankingCell", bundle: nil), forCellWithReuseIdentifier: "hotranking")
         view.register(UINib(nibName: "ListHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "listheader")
+        view.registerNib(type: ColumnContentCell.self)
+        view.registerNib(type: WallPaperContentCell.self)
+        view.registerNib(type: FullScreenContentCell.self)
         return view
     }()
     private let errorView = ErrorMessageView()
@@ -56,18 +58,19 @@ class RecommendationItemsListViewController: UIViewController, RecommendationIte
         super.viewDidLoad()
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.store?.shouldRealoadData
-            .subscribe(onNext: { [weak self] section in
-                self?.collectionView.reloadSections(IndexSet(arrayLiteral: section))
+        self.store.items
+            .subscribe(onNext: { [weak self] items in
+                self?.collectionView.reloadData()
+                print(items.count)
             })
             .disposed(by: disposeBag)
         
         rx.sentMessage(#selector(viewDidAppear(_:)))
             .subscribe(onNext: { [weak self] _ in
-                self?.store.refleshRecommendedItem()
-                self?.store.refleshHotrankingItem()
+                self?.store.reflesh()
             })
             .disposed(by: disposeBag)
+        
     }
 
     func showErrorMessage(text: String) {
@@ -83,86 +86,26 @@ class RecommendationItemsListViewController: UIViewController, RecommendationIte
 }
 
 extension RecommendationItemsListViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return store.recommendedItem.count
-        } else {
-            return store.hotrankingItem.count
-        }
+        return self.store.items.value.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recommendedlist", for: indexPath) as? RecommendedListCell else {
-                fatalError()
-            }
-            cell.update(item: store.recommendedItem[indexPath.item])
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hotranking", for: indexPath) as? HotRankingCell else {
-                fatalError()
-            }
-            cell.update(item: store.hotrankingItem[indexPath.item])
-            return cell
+        let item = self.store.items.value[indexPath.item]
+        switch item.type {
+        case .wallpaper:
+            return WallPaperContentCell.dequeue(from: collectionView, for: indexPath, with: item)
+        case .pickup:
+            return FullScreenContentCell.dequeue(from: collectionView, for: indexPath, with: item)
+        case .column:
+            return ColumnContentCell.dequeue(from: collectionView, for: indexPath, with: item)
         }
     }
 }
 
 extension RecommendationItemsListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let margin: CGFloat = 20
-        let contentWidth = collectionView.frame.width - margin * 2
-        if indexPath.section == 0 {
-            return CGSize(width: contentWidth, height: contentWidth * RecommendedListCell.cellHeightRatio)
-        } else {
-            let contentMargin: CGFloat = 20
-            let width = (contentWidth - contentMargin) / 2
-            return CGSize(width: width, height: width * HotRankingCell.cellHeightRatio)
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 25
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
-    }
-
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            guard let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: UICollectionView.elementKindSectionHeader,
-                withReuseIdentifier: "listheader",
-                for: indexPath
-                ) as? ListHeaderView else {
-                    fatalError()
-            }
-            if indexPath.section == 0 {
-                header.update(title: "Daily choice")
-            } else {
-                header.update(title: "Weekly Ranking")
-            }
-            return header
-        } else {
-            return UICollectionReusableView()
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 30)
-    }
-}
-
-extension RecommendationItemsListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            self.store?.selectRecommendedItem(index: indexPath.item)
-        } else {
-            self.store?.selectHotRankingItem(index: indexPath.item)
-        }
+        let width: CGFloat = collectionView.frame.width - 40
+        return CGSize(width: width, height: width * CGFloat(474.48 / 374))
     }
 }

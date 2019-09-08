@@ -16,6 +16,8 @@ extension Firebase {
                 .whereField("isBanned", isEqualTo: false)
                 .order(by: "publishedAt", descending: true)
         }
+        
+        private let uniqueID: String
 
         let name: String
         let desc: String?
@@ -24,13 +26,11 @@ extension Firebase {
         let publishedAt: Date
         
         var items: CollectionReference {
-            return Shop.collection.document(identity.id).collection("item")
+            return Shop.collection.document(uniqueID).collection("item")
         }
 
-        let identity: FirestoreIdentity
-
-        init(identity: FirestoreIdentity, json: [String: Any]) throws {
-            self.identity = identity
+        init(id: String, timestamps: Timestamps, json: [String: Any]) throws {
+            self.uniqueID = id
             self.name = try convert(target: parse(key: "name", json: json))
             self.desc = try? convert(target: parse(key: "desc", json: json))
             self.ownerID = try convert(target: parse(key: "ownerID", json: json))

@@ -10,26 +10,15 @@ import RxRelay
 import RxSwift
 
 protocol RecommendationItemsListStore {
-    var shouldRealoadData: PublishRelay<Int> { get }
-    var recommendedItem: [Firebase.Item] { get }
-    var hotrankingItem: [Firebase.Item] { get }
+    var items: BehaviorRelay<[Firebase.Item]> { get }
 
-    func selectRecommendedItem(index: Int)
-    func selectHotRankingItem(index: Int)
-    func selectShopDetail(shop: Firebase.Shop)
-    
-    func refleshRecommendedItem()
-    func refleshHotrankingItem()
+    func select(index: Int)
+    func reflesh()
 }
 
 class RecommendationItemsListStoreImpl: RecommendationItemsListStore {
     
-    var hotrankingItem: [Firebase.Item] {
-        return hotrankingItemRelay.value
-    }
-    var recommendedItem: [Firebase.Item] {
-        return recommendedItemRelay.value
-    }
+    let items: BehaviorRelay<[Firebase.Item]> = .init(value: [])
 
     var shouldRealoadData: PublishRelay<Int> = PublishRelay()
 
@@ -38,8 +27,7 @@ class RecommendationItemsListStoreImpl: RecommendationItemsListStore {
     private var router: RecommendationItemListWireframe
     private var errorInteractor: RecommendationItemListErrorInteractor
 
-    private let recommendedItemRelay: BehaviorRelay<[Firebase.Item]> = BehaviorRelay(value: [])
-    private let hotrankingItemRelay: BehaviorRelay<[Firebase.Item]> = BehaviorRelay(value: [])
+    private let itemRelay: BehaviorRelay<[Firebase.Item]> = BehaviorRelay(value: [])
 
     private let disposeBag = DisposeBag()
 
@@ -53,54 +41,25 @@ class RecommendationItemsListStoreImpl: RecommendationItemsListStore {
         self.view = view
         self.router = router
         self.errorInteractor = errorInteractor
-        viewModel.output.recommendedItem
+        viewModel.output.items
             .catchError({ error -> Observable<[Firebase.Item]> in
                 view.showErrorMessage(text:
                     errorInteractor.handle(error: error)
                 )
                 return Observable.just([])
             })
-            .bind(to: recommendedItemRelay)
+            .bind(to: itemRelay)
             .disposed(by: disposeBag)
-        viewModel.output.hotrankingItem
-            .catchError({ error -> Observable<[Firebase.Item]> in
-                view.showErrorMessage(text:
-                    errorInteractor.handle(error: error)
-                )
-                return Observable.just([])
-            })
-            .bind(to: hotrankingItemRelay)
-            .disposed(by: disposeBag)
-        recommendedItemRelay
-            .subscribe(onNext: { [weak self] _ in
-                self?.shouldRealoadData.accept(0)
-            })
-            .disposed(by: disposeBag)
-        hotrankingItemRelay
-            .subscribe(onNext: { [weak self] _ in
-                self?.shouldRealoadData.accept(1)
-            })
+        itemRelay
+            .bind(to: items)
             .disposed(by: disposeBag)
     }
 
-    func selectRecommendedItem(index: Int) {
-        router.showDetailView(item: self.recommendedItemRelay.value[index])
-    }
-
-    func selectHotRankingItem(index: Int) {
-        router.showDetailView(item: self.hotrankingItemRelay.value[index])
-    }
-
-    func selectShopDetail(shop: Firebase.Shop) {
-        // Todo: 未実装
-        return
+    func select(index: Int) {
+        router.showDetailView(item: self.itemRelay.value[index])
     }
     
-    func refleshRecommendedItem() {
-        viewModel.input.refleshRecommendedItem.accept(())
-    }
-    
-    func refleshHotrankingItem() {
-        viewModel.input.refleshHotrankingItem.accept(())
+    func reflesh() {
+        viewModel.input.reflesh.accept(())
     }
 }
