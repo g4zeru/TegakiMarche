@@ -25,7 +25,7 @@ extension Firebase {
         let subTitle: String?
         let isPublished: Bool
         let publishedAt: Date
-        let thumbnailImagePath: String?
+        let thumbnailImagePath: URL?
         let type: ContentType
     }
 }
@@ -44,7 +44,7 @@ extension Firebase.Item: FirestoreDocumentModel {
         let publishedAt: Timestamp = try convert(target: parse(key: "publishedAt", json: json))
         self.publishedAt = publishedAt.dateValue()
         self.isPublished = try convert(target: parse(key: "isPublished", json: json))
-        self.thumbnailImagePath = nil
+        self.thumbnailImagePath = try? convert(target: parse(key: "imageURL", json: json))
         self.type = try Firebase.Item.contentType(json: json)
     }
     
