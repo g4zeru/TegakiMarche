@@ -51,20 +51,18 @@ class RecommendationItemsListViewController: UIViewController, RecommendationIte
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
-        self.store?.shouldRealoadData
-            .subscribe(onNext: { [weak self] section in
-                self?.collectionView.reloadSections(IndexSet(arrayLiteral: section))
+        self.store.items
+            .subscribe(onNext: { items in
+                print(items.count)
             })
             .disposed(by: disposeBag)
         
         rx.sentMessage(#selector(viewDidAppear(_:)))
             .subscribe(onNext: { [weak self] _ in
-                self?.store.refleshRecommendedItem()
-                self?.store.refleshHotrankingItem()
+                self?.store.reflesh()
             })
             .disposed(by: disposeBag)
+        
     }
 
     func showErrorMessage(text: String) {
@@ -76,62 +74,5 @@ class RecommendationItemsListViewController: UIViewController, RecommendationIte
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             self.errorView.isHidden = true
         }
-    }
-}
-
-extension RecommendationItemsListViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return store.recommendedItem.count
-        } else {
-            return store.hotrankingItem.count
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
-    }
-}
-
-extension RecommendationItemsListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .zero
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 25
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
-    }
-
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            guard let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: UICollectionView.elementKindSectionHeader,
-                withReuseIdentifier: "listheader",
-                for: indexPath
-                ) as? ListHeaderView else {
-                    fatalError()
-            }
-            header.update(title: "Daily choice")
-            return header
-        } else {
-            return UICollectionReusableView()
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 30)
-    }
-}
-
-extension RecommendationItemsListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.store?.selectRecommendedItem(index: indexPath.item)
     }
 }
