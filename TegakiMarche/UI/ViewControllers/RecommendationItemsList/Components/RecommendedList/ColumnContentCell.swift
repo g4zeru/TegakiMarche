@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import Instantiate
+import InstantiateStandard
 
-class ColumnContentCell: UICollectionViewCell {
-
+class ColumnContentCell: HomeContentCell, Reusable, NibType, NibInstantiatable {
+    typealias Dependency = Firebase.Item
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    func inject(_ dependency: Firebase.Item) {
+        return
+    }
 }
