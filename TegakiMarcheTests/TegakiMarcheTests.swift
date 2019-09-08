@@ -5,6 +5,7 @@
 //  Created by iniad on 2019/09/07.
 //
 
+@testable import TegakiMarche
 import XCTest
 
 class TegakiMarcheTests: XCTestCase {
