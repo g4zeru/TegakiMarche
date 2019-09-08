@@ -63,6 +63,12 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="286" height="376"/>
+            <connections>
+                <outlet property="contentImageView" destination="Nw0-rW-ikt" id="ONb-Sl-aKF"/>
+                <outlet property="overlayView" destination="z5X-js-iBV" id="aP1-Kb-Keu"/>
+                <outlet property="subTitleLabel" destination="att-DG-4wQ" id="p03-Wy-aAU"/>
+                <outlet property="titleLabel" destination="Djp-1r-tKr" id="dTy-mN-Rl8"/>
+            </connections>
             <point key="canvasLocation" x="162.31884057971016" y="107.14285714285714"/>
         </collectionViewCell>
     </objects>

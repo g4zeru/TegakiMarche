@@ -8,10 +8,13 @@
 import UIKit
 
 class FullScreenContentCell: UICollectionViewCell {
-
+    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var contentImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
 }
