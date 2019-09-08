@@ -12,6 +12,8 @@ target 'TegakiMarche' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'GoogleSignIn'
+  pod 'Instantiate'
+  pod 'InstantiateStandard'
 
   target 'TegakiMarcheTests' do
     inherit! :search_paths
