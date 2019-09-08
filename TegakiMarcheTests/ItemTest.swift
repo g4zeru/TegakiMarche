@@ -14,6 +14,7 @@ class FirebaseItemTests: XCTestCase {
         let json: [String: Any] = ["title":"ttt",
                                    "desc":"ddd",
                                    "publishedAt": Timestamp(date: Date.create(yyyyMMdd: "20170810")!),
+                                   "imageURL":URL(string: "https://i-ogp.pximg.net/c/1050x550_80_a2_g2/img-master/img/2013/07/02/17/43/14/36786691_p0_master1200.jpg")!,
                                    "isPublished": true,
                                    "type":"pickup"]
         do {
@@ -25,14 +26,5 @@ class FirebaseItemTests: XCTestCase {
             print(error)
             XCTAssertTrue(false)
         }
-    }
-}
-
-extension Date {
-    static func create(yyyyMMdd text: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyyMMddHHmmssZ"
-        return formatter.date(from: text+"000000+09:00")
     }
 }
