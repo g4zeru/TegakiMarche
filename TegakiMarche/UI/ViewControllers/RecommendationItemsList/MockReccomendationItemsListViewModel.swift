@@ -12,11 +12,11 @@ import FirebaseFirestore
 class MockReccomendationItemsListViewModel: RecommendationItemListInput, RecommendationItemListOutput, RecommendationItemListViewModel {
     let reflesh: PublishRelay<Void> = PublishRelay()
     
-    var items: Observable<[Firebase.Item]> {
+    var items: Observable<[Firebase.PickupItem]> {
         return itemSubject
     }
     
-    private let itemSubject: PublishSubject<[Firebase.Item]>
+    private let itemSubject: PublishSubject<[Firebase.PickupItem]>
     
     let disposeBag = DisposeBag()
     
@@ -29,7 +29,7 @@ class MockReccomendationItemsListViewModel: RecommendationItemListInput, Recomme
     }
     
     init() {
-        let itemSubject = PublishSubject<[Firebase.Item]>()
+        let itemSubject = PublishSubject<[Firebase.PickupItem]>()
         let json1: [String: Any] = ["title":"夏の思い出特集！",
                                    "desc":"夏の思い出をTegakiMarcheでも作ろう",
                                    "publishedAt": Timestamp(date: Date.create(yyyyMMdd: "20170810")!),
@@ -44,11 +44,11 @@ class MockReccomendationItemsListViewModel: RecommendationItemListInput, Recomme
                                     "type":"wallpaper"]
         reflesh
             .subscribe(onNext: { _ in
-                itemSubject.onNext([try! Firebase.Item(id: "xxx",
+                itemSubject.onNext([try! Firebase.PickupItem(id: "xxx",
                                                        timestamps: Timestamps(createdAt: Date(),
                                                                               updatedAt: Date()),
                                                        json: json1),
-                                    try! Firebase.Item(id: "sss",
+                                    try! Firebase.PickupItem(id: "sss",
                                                        timestamps: Timestamps(createdAt: Date(),
                                                                               updatedAt: Date()),
                                                        json: json2)])

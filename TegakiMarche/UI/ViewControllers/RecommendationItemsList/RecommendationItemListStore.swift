@@ -10,7 +10,7 @@ import RxRelay
 import RxSwift
 
 protocol RecommendationItemsListStore {
-    var items: BehaviorRelay<[Firebase.Item]> { get }
+    var items: BehaviorRelay<[Firebase.PickupItem]> { get }
 
     func select(index: Int)
     func reflesh()
@@ -18,7 +18,7 @@ protocol RecommendationItemsListStore {
 
 class RecommendationItemsListStoreImpl: RecommendationItemsListStore {
     
-    let items: BehaviorRelay<[Firebase.Item]> = .init(value: [])
+    let items: BehaviorRelay<[Firebase.PickupItem]> = .init(value: [])
 
     var shouldRealoadData: PublishRelay<Int> = PublishRelay()
 
@@ -27,7 +27,7 @@ class RecommendationItemsListStoreImpl: RecommendationItemsListStore {
     private var router: RecommendationItemListWireframe
     private var errorInteractor: RecommendationItemListErrorInteractor
 
-    private let itemRelay: BehaviorRelay<[Firebase.Item]> = BehaviorRelay(value: [])
+    private let itemRelay: BehaviorRelay<[Firebase.PickupItem]> = BehaviorRelay(value: [])
 
     private let disposeBag = DisposeBag()
 
@@ -42,7 +42,7 @@ class RecommendationItemsListStoreImpl: RecommendationItemsListStore {
         self.router = router
         self.errorInteractor = errorInteractor
         viewModel.output.items
-            .catchError({ error -> Observable<[Firebase.Item]> in
+            .catchError({ error -> Observable<[Firebase.PickupItem]> in
                 view.showErrorMessage(text:
                     errorInteractor.handle(error: error)
                 )

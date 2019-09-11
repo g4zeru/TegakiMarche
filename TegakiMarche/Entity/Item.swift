@@ -9,7 +9,7 @@ import FirebaseFirestore
 import RxSwift
 
 extension Firebase {
-    struct Item {
+    struct PickupItem {
         enum ContentType: String {
             case pickup
             case column
@@ -30,9 +30,9 @@ extension Firebase {
     }
 }
 
-extension Firebase.Item: FirestoreDocumentModel {
-    static var baseQuery: ObservableFirebaseQuery<Firebase.Item> {
-        return ObservableFirebaseQuery<Firebase.Item>(query: collection)
+extension Firebase.PickupItem: FirestoreDocumentModel {
+    static var baseQuery: ObservableFirebaseQuery<Firebase.PickupItem> {
+        return ObservableFirebaseQuery<Firebase.PickupItem>(query: collection)
             .whereField("isPublished", isEqualTo: true)
             .order(by: "publishedAt", descending: true)
     }
@@ -45,7 +45,7 @@ extension Firebase.Item: FirestoreDocumentModel {
         self.publishedAt = publishedAt.dateValue()
         self.isPublished = try convert(target: parse(key: "isPublished", json: json))
         self.thumbnailImagePath = try? convert(target: parse(key: "imageURL", json: json))
-        self.type = try Firebase.Item.contentType(json: json)
+        self.type = try Firebase.PickupItem.contentType(json: json)
     }
     
     static func contentType(json: [String: Any]) throws -> ContentType {
@@ -60,14 +60,14 @@ extension Firebase.Item: FirestoreDocumentModel {
     
 }
 
-extension Firebase.Item.AdditionalContent: FirestoreDocumentModel {
+extension Firebase.PickupItem.AdditionalContent: FirestoreDocumentModel {
     private enum ContentType: String {
         case text
         case image
     }
     
-    static var baseQuery: ObservableFirebaseQuery<Firebase.Item.AdditionalContent> {
-        return .init(query: Firebase.Item.collection.document().collection("contents"))
+    static var baseQuery: ObservableFirebaseQuery<Firebase.PickupItem.AdditionalContent> {
+        return .init(query: Firebase.PickupItem.collection.document().collection("contents"))
     }
     
     init(id: String, timestamps: Timestamps, json: [String: Any]) throws {
@@ -86,6 +86,6 @@ extension Firebase.Item.AdditionalContent: FirestoreDocumentModel {
     }
     
     static func collectionRef(id: String) -> CollectionReference {
-        return Firebase.Item.collection.document(id).collection("contents")
+        return Firebase.PickupItem.collection.document(id).collection("contents")
     }
 }

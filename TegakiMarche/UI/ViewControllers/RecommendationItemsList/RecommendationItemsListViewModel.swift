@@ -15,7 +15,7 @@ protocol RecommendationItemListInput {
 }
 
 protocol RecommendationItemListOutput {
-    var items: Observable<[Firebase.Item]> { get }
+    var items: Observable<[Firebase.PickupItem]> { get }
 }
 
 protocol RecommendationItemListViewModel {
@@ -26,11 +26,11 @@ protocol RecommendationItemListViewModel {
 final class RecommendationItemsListViewModelImpl: RecommendationItemListInput, RecommendationItemListOutput, RecommendationItemListViewModel {
     let reflesh: PublishRelay<Void> = PublishRelay()
     
-    var items: Observable<[Firebase.Item]> {
+    var items: Observable<[Firebase.PickupItem]> {
         return itemSubject
     }
 
-    let itemSubject = PublishSubject<[Firebase.Item]>()
+    let itemSubject = PublishSubject<[Firebase.PickupItem]>()
 
     var input: RecommendationItemListInput {
         return self
@@ -42,7 +42,7 @@ final class RecommendationItemsListViewModelImpl: RecommendationItemListInput, R
 
     private let disposeBag = DisposeBag()
 
-    init(itemQuery: ObservableFirebaseQuery<Firebase.Item>) {
+    init(itemQuery: ObservableFirebaseQuery<Firebase.PickupItem>) {
         reflesh
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }

@@ -18,7 +18,7 @@ class FirebaseItemTests: XCTestCase {
                                    "isPublished": true,
                                    "type":"pickup"]
         do {
-            let item = try Firebase.Item(id: "xxx", timestamps: Timestamps(createdAt: Date(), updatedAt: Date()), json: json)
+            let item = try Firebase.PickupItem(id: "xxx", timestamps: Timestamps(createdAt: Date(), updatedAt: Date()), json: json)
             XCTAssertTrue(item.publishedAt<Date())
             XCTAssertTrue(item.isPublished)
             XCTAssertTrue(item.type == .pickup)
