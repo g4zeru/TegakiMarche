@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol RecommendationItemListWireframe {
-    func showDetailView(item: Firebase.Item)
+    func showDetailView(item: Firebase.PickupItem)
     func showUserDetailView(item: Firebase.User)
 }
 
@@ -35,7 +35,7 @@ class RecommendationItemListRouter {
 }
 
 extension RecommendationItemListRouter: RecommendationItemListWireframe {
-    func showDetailView(item: Firebase.Item) {
+    func showDetailView(item: Firebase.PickupItem) {
         view.navigationController?.pushViewController(ItemDetailsViewController(item: item), animated: true)
     }
 

@@ -10,12 +10,12 @@ import Instantiate
 import InstantiateStandard
 
 class ColumnContentCell: HomeContentCell, Reusable, NibType, NibInstantiatable {
-    typealias Dependency = Firebase.Item
+    typealias Dependency = Firebase.PickupItem
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    func inject(_ dependency: Firebase.Item) {
+    func inject(_ dependency: Firebase.PickupItem) {
         return
     }
 }

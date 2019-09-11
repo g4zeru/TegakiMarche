@@ -10,7 +10,7 @@ import Instantiate
 import InstantiateStandard
 
 class WallPaperContentCell: HomeContentCell, Reusable, NibType, NibInstantiatable {
-    typealias Dependency = Firebase.Item
+    typealias Dependency = Firebase.PickupItem
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var deviceLabel: UILabel!
@@ -29,7 +29,7 @@ class WallPaperContentCell: HomeContentCell, Reusable, NibType, NibInstantiatabl
         contentImageView.image = nil
     }
     
-    func inject(_ dependency: Firebase.Item) {
+    func inject(_ dependency: Firebase.PickupItem) {
         titleLabel.text = dependency.title
         deviceLabel.text = dependency.subTitle
         contentImageView.setImage(url: dependency.thumbnailImagePath!)
