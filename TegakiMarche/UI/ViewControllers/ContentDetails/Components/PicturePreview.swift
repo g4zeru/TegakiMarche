@@ -26,32 +26,11 @@ class PicturePreview: UIView, UIScrollViewDelegate {
         view.contentMode = .scaleAspectFit
         return view
     }()
-    var imageAspectRatio: CGFloat {
+    private var imageAspectRatio: CGFloat {
         get {
-            return PicturePreview.aspectRatio(size: self.imageView.frame.size)
+            ///本来なら画像がない場合0を返したいが、0徐算が発生する可能性があるため1を返す
+            return self.imageView.image != nil ? self.imageView.image!.size.width / self.imageView.image!.size.height : 1
         }
-        set {
-            if newValue == PicturePreview.aspectRatio(size: self.imageView.frame.size) {
-                return
-            }
-            scrollView.maximumZoomScale = newValue > 1 ? newValue : 1 / newValue
-            imageView.snp.remakeConstraints { (maker) in
-                maker.edges.equalToSuperview()
-                if newValue > 1 {
-                    maker.width.equalToSuperview()
-                    maker.height.equalTo(self.snp.width).multipliedBy(CGFloat(1) / newValue)
-                } else if newValue < 1 {
-                    maker.height.equalToSuperview()
-                    maker.width.equalTo(self.snp.height).multipliedBy(newValue)
-                } else {
-                    maker.width.equalToSuperview()
-                    maker.height.equalToSuperview()
-                }
-            }
-            layoutIfNeeded()
-        }
-        
-        
     }
     var image: UIImage? {
         get {
@@ -88,6 +67,25 @@ class PicturePreview: UIView, UIScrollViewDelegate {
         }
     }
     
+    func updateFrame() {
+        let ratio = image?.aspectRatio ?? 1
+        scrollView.maximumZoomScale = ratio > 1 ? ratio : 1 / ratio
+        imageView.snp.remakeConstraints { (maker) in
+            maker.edges.equalToSuperview()
+            if ratio > 1 {
+                maker.width.equalToSuperview()
+                maker.height.equalTo(self.snp.width).multipliedBy(1 / ratio)
+            } else if ratio < 1 {
+                maker.height.equalToSuperview()
+                maker.width.equalTo(self.snp.height).multipliedBy(ratio)
+            } else {
+                maker.width.equalToSuperview()
+                maker.height.equalToSuperview()
+            }
+        }
+        layoutIfNeeded()
+    }
+    
     func updateInset() {
         let vertical: CGFloat = scrollView.frame.height <= imageView.frame.height ? 0.5 : ((scrollView.frame.height - imageView.frame.height) / 2) + 0.5
         let horizontal: CGFloat = scrollView.frame.width <= imageView.frame.width ? 0.5 : ((scrollView.frame.width - imageView.frame.width) / 2) + 0.5
@@ -100,10 +98,6 @@ class PicturePreview: UIView, UIScrollViewDelegate {
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         updateInset()
-    }
-    
-    static func aspectRatio(size: CGSize) -> CGFloat {
-        return size.width / size.height
     }
 }
 

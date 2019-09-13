@@ -9,6 +9,7 @@ import UIKit
 import Instantiate
 
 class MusicContentCollectionViewCell: UICollectionViewCell, NibType, Reusable {
+    typealias Dependency = (String, UIImage)
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var contentImageView: UIImageView!
@@ -23,5 +24,10 @@ class MusicContentCollectionViewCell: UICollectionViewCell, NibType, Reusable {
         contentImageView.layer.masksToBounds = true
         contentImageView.layer.cornerRadius = 5
         contentImageView.contentMode = .scaleAspectFill
+    }
+    
+    func inject(_ dependency: (String, UIImage)) {
+        self.contentImageView.image = dependency.1
+        self.contentLabel.text = dependency.0
     }
 }

@@ -6,23 +6,16 @@
 //
 
 import UIKit
+import Instantiate
 
-class ContentDetailsViewController: UIViewController, UIScrollViewDelegate {
-    let image: UIImage
+class ContentDetailsViewController: UIViewController, UIScrollViewDelegate, NibType, NibInstantiatable {
+    let image: UIImage = UIImage(named: "demo")!
     
     @IBOutlet weak var contentView: PicturePreview!
     @IBOutlet weak var verticalStackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     let mock: [(String, UIImage)] = [("ゴーストルール", UIImage(named: "demo1")!), ("ゴーストルール", UIImage(named: "demo2")!), ("ゴーストルール", UIImage(named: "demo3")!)]
-    
-    init() {
-        self.image = UIImage(named: "demo")!
-        super.init(nibName: "CreatorDetailsViewController", bundle: nil)
-    }
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,17 +41,16 @@ CD: https://www.amazon.co.jp/dp/B07PT7CJ22…
 iTunes:https://music.apple.com/jp/album/%E6%…
 Pixiv: https://www.pixiv.net/member_illust.php…
 """))
-        let otherview = OtherItemSectionView()
-        otherview.collectionView.dataSource = self
-        otherview.collectionView.delegate = self
+        let otherview = RelatedItemsView(type: .audio, contentSize: CGSize(width: 130, height: 130))
+        otherview.contents.accept(mock)
         verticalStackView.addArrangedSubview(otherview)
         
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        contentView.imageAspectRatio = PicturePreview.aspectRatio(size: image.size)
-        contentView.updateInset()
+        self.contentView.updateFrame()
+        self.contentView.updateInset()
         self.navigationController?.navigationBar.isHidden = false
     }
     
@@ -70,27 +62,5 @@ Pixiv: https://www.pixiv.net/member_illust.php…
 extension UINavigationController {
     open override var childForStatusBarStyle: UIViewController? {
         return self.visibleViewController
-    }
-}
-
-extension ContentDetailsViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.mock.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = MusicContentCollectionViewCell.dequeue(from: collectionView, for: indexPath)
-        cell.contentLabel.text = mock[indexPath.item].0
-        cell.contentImageView.image = mock[indexPath.item].1
-        return cell
-    }
-}
-
-extension ContentDetailsViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 130, height: 130)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
     }
 }
