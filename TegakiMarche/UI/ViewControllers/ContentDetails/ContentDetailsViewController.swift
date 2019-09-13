@@ -7,17 +7,17 @@
 
 import UIKit
 
-class CreatorDetailsViewController: UIViewController, UIScrollViewDelegate {
+class ContentDetailsViewController: UIViewController, UIScrollViewDelegate {
     let image: UIImage
     
     @IBOutlet weak var contentView: PicturePreview!
     @IBOutlet weak var verticalStackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    let mock: [(String, UIImage)] = [("ゴーストルール", UIImage(named: "ゴーストルール")!), ("ゴーストルール", UIImage(named: "ゴーストルール")!), ("ゴーストルール", UIImage(named: "ゴーストルール")!)]
+    let mock: [(String, UIImage)] = [("ゴーストルール", UIImage(named: "demo1")!), ("ゴーストルール", UIImage(named: "demo2")!), ("ゴーストルール", UIImage(named: "demo3")!)]
     
-    init(image: UIImage) {
-        self.image = image
+    init() {
+        self.image = UIImage(named: "demo")!
         super.init(nibName: "CreatorDetailsViewController", bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -28,7 +28,7 @@ class CreatorDetailsViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         self.setNeedsStatusBarAppearanceUpdate()
         self.scrollView.delegate = self
-        self.navigationItem.title = "愛言葉Ⅲ"
+        self.navigationItem.title = "TegakiMarche"
         self.navigationController?.navigationBar.titleTextAttributes =
             [.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -41,8 +41,8 @@ class CreatorDetailsViewController: UIViewController, UIScrollViewDelegate {
             maker.height.equalTo(200)
         }
         verticalStackView.addArrangedSubview(DetailTextView.instantiate(with: """
-Music: DECO*27
-Illust: 八三
+Music: Terany
+Illust: g4zeru
 
 CD: https://www.amazon.co.jp/dp/B07PT7CJ22…
 iTunes:https://music.apple.com/jp/album/%E6%…
@@ -73,7 +73,7 @@ extension UINavigationController {
     }
 }
 
-extension CreatorDetailsViewController: UICollectionViewDataSource {
+extension ContentDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.mock.count
     }
@@ -86,7 +86,7 @@ extension CreatorDetailsViewController: UICollectionViewDataSource {
     }
 }
 
-extension CreatorDetailsViewController: UICollectionViewDelegateFlowLayout {
+extension ContentDetailsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 130, height: 130)
     }

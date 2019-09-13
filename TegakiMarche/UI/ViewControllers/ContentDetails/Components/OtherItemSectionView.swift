@@ -12,7 +12,7 @@ import RxCocoa
 class OtherItemSectionView: UIView {
     let titleLabel: UILabel = {
         let view = UILabel()
-        view.text = "DECO*27(Music)その他の作品"
+        view.text = "Terany(Music)その他の作品"
         return view
     }()
     let collectionView: UICollectionView = {
