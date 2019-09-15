@@ -14,15 +14,12 @@ extension Firebase.Content {
     }
 }
 
-extension Firebase.Content.Audio: FirestoreDocumentModel {
-    static var collection: CollectionReference {
-        return Firebase.contentsDatastore.collection(String(describing: Self.self).lowercased())
-    }
+extension Firebase.Content.Audio: ContentDocumentModel {
     static var baseQuery: ObservableFirebaseQuery<Firebase.Content.Audio> {
         return ObservableFirebaseQuery<Firebase.Content.Audio>(query: collection)
     }
     
     init(id: String, timestamps: Timestamps, json: [String : Any]) throws {
-        <#code#>
+        self.audioURL = URL(string: try convert(target: parse(key: "audioURL", json: json)))!
     }
 }

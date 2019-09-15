@@ -13,15 +13,12 @@ extension Firebase.Content {
     }
 }
 
-extension Firebase.Content.Picture: FirestoreDocumentModel {
-    static var collection: CollectionReference {
-        return Firebase.contentsDatastore.collection(String(describing: Self.self).lowercased())
-    }
+extension Firebase.Content.Picture: ContentDocumentModel {
     static var baseQuery: ObservableFirebaseQuery<Firebase.Content.Picture> {
         return ObservableFirebaseQuery<Firebase.Content.Picture>(query: collection)
     }
     
     init(id: String, timestamps: Timestamps, json: [String : Any]) throws {
-        <#code#>
+        
     }
 }
