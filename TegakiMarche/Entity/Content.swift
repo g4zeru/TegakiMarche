@@ -40,7 +40,7 @@ extension Firebase.Content: FirestoreDocumentModel {
         self.type = ContentType(rawValue: typeValue)!
     }
     
-    static func contentDoc(id: String, type: ContentType) -> DocumentReference {
+    private static func contentDoc(id: String, type: ContentType) -> DocumentReference {
         return Firebase.baseRef.document("contentscontainer").collection(type.rawValue).document(id)
     }
 }

@@ -13,6 +13,9 @@ struct Firebase {
     static var standardDatastore: DocumentReference {
         return baseRef.document("mainContainer")
     }
+    static var contentsDatastore: DocumentReference {
+        return baseRef.document("contentsContainer")
+    }
 }
 
 struct Timestamps {
