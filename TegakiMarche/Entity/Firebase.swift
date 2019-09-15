@@ -11,7 +11,10 @@ import RxSwift
 struct Firebase {
     static let baseRef = Firestore.firestore().collection("datastore")
     static var standardDatastore: DocumentReference {
-        return baseRef.document("v1")
+        return baseRef.document("mainContainer")
+    }
+    static var contentsDatastore: DocumentReference {
+        return baseRef.document("contentsContainer")
     }
 }
 
