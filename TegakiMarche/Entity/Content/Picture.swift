@@ -22,3 +22,9 @@ extension Firebase.Content.Picture: ContentDocumentModel {
         
     }
 }
+
+extension Firebase.Content.Picture: MockContentDocumentModel {
+    static var mock: Firebase.Content.Picture {
+        return try! .init(id: "test", timestamps: Timestamps(createdAt: Date(), updatedAt: Date()), json: [:])
+    }
+}

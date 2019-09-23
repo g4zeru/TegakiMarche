@@ -10,6 +10,10 @@ import FirebaseFirestore
 
 protocol ContentDocumentModel: FirestoreDocumentModel {}
 
+protocol MockContentDocumentModel: ContentDocumentModel {
+    static var mock: Self { get }
+}
+
 extension ContentDocumentModel {
     static var collection: CollectionReference {
         return Firebase.contentsDatastore.collection(String(describing: Self.self).lowercased())

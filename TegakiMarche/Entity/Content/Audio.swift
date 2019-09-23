@@ -23,3 +23,9 @@ extension Firebase.Content.Audio: ContentDocumentModel {
         self.audioURL = URL(string: try convert(target: parse(key: "audioURL", json: json)))!
     }
 }
+
+extension Firebase.Content.Audio: MockContentDocumentModel {
+    static var mock: Firebase.Content.Audio {
+        return try! .init(id: "test", timestamps: Timestamps(createdAt: Date(), updatedAt: Date()), json: ["audioURL": "https://google.com"])
+    }
+}
