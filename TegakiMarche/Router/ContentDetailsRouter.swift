@@ -7,6 +7,7 @@
 
 import UIKit
 import Instantiate
+import FirebaseFirestore
 
 class ContentDetailsRouter {
     static func assembleModules(content: Firebase.Content) -> UIViewController {
@@ -15,15 +16,27 @@ class ContentDetailsRouter {
     }
     
     private static func view(content: Firebase.Content) -> ContentDetailsViewController {
-        let view = ContentDetailsViewController.instantiate(with: content)
-        let store: ContentDetailsStore
-        switch content.type {
-        case .audio:
-            store = AudioDetailsStore(viewController: view, viewModel: .init(docRef: content.detailsRef))
-        case .picture:
-            store = PictureDetailsStore(viewController: view, viewModel: .init(docRef: content.detailsRef))
-        }
+        let view = ContentDetailsViewController.instantiate()
+        let store: ContentDetailsStore = ContentDetailsRouter.mock(content: content, view: view)
         view.store = store
         return view
+    }
+    
+    static func store(content: Firebase.Content, view: ContentDetailsViewControllerProtocol) -> ContentDetailsStore {
+        switch content.type {
+        case .audio:
+            return AudioDetailsStore(content: content,viewController: view, viewModel: ContentViewModel(docRef: content.detailsRef))
+        case .picture:
+            return PictureDetailsStore(content: content,viewController: view, viewModel: ContentViewModel(docRef: content.detailsRef))
+        }
+    }
+    
+    static func mock(content: Firebase.Content, view: ContentDetailsViewControllerProtocol) -> ContentDetailsStore {
+        switch content.type {
+        case .audio:
+            return AudioDetailsStore(content: content,viewController: view, viewModel: MockContentViewModel(docRef: content.detailsRef))
+        case .picture:
+            return PictureDetailsStore(content: content,viewController: view, viewModel: MockContentViewModel(docRef: content.detailsRef))
+        }
     }
 }

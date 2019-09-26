@@ -11,18 +11,22 @@ import RxSwift
 import RxCocoa
 
 protocol ContentDetailsViewControllerProtocol {
-    func showError(text: String)
+    var stackContents: [UIView] { get }
+    func insertStackContent(view: UIView, at: Int)
+    func removeStackContent(view: UIView)
+    func updateImage(_ image: UIImage?)
 }
 
-class ContentDetailsViewController: UIViewController, UIScrollViewDelegate, NibType, NibInstantiatable {
-    
-    typealias Dependency = Firebase.Content
+class ContentDetailsViewController: UIViewController, UIScrollViewDelegate, NibType, NibInstantiatable, ContentDetailsViewControllerProtocol {
+    ///contentViewが存在しない場合もあるが、それは想定外エラーなのでその場合は処理落ちさせる。
+    ///なるべくcontentViewが存在しない場合をなくすためにテストを重点的に記述する
+    var stackContents: [UIView] {
+        return verticalStackView.arrangedSubviews
+    }
     
     @IBOutlet weak var contentView: PicturePreview!
     @IBOutlet weak var verticalStackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
-    
-    private(set) var content: Firebase.Content! = nil
     
     var store: ContentDetailsStore!
     
@@ -42,8 +46,6 @@ class ContentDetailsViewController: UIViewController, UIScrollViewDelegate, NibT
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.contentView.updateFrame()
-        self.contentView.updateInset()
         self.navigationController?.navigationBar.isHidden = false
     }
     
@@ -51,8 +53,17 @@ class ContentDetailsViewController: UIViewController, UIScrollViewDelegate, NibT
         return .lightContent
     }
     
-    func inject(_ dependency: Firebase.Content) {
-        self.content = dependency
+    func updateImage(_ image: UIImage?) {
+        contentView.image = image
+        contentView.updateFrame()
+        contentView.updateInset()
+    }
+    
+    func insertStackContent(view: UIView, at: Int = 0) {
+        verticalStackView.insertArrangedSubview(view, at: at)
+    }
+    func removeStackContent(view: UIView) {
+        verticalStackView.removeArrangedSubview(view)
     }
 }
 

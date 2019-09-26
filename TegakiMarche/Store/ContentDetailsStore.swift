@@ -7,6 +7,12 @@
 
 import RxSwift
 import RxCocoa
+import FirebaseFirestore
+
+enum ComponentType {
+    case content
+    case mock
+}
 
 protocol ContentDetailsStore {
     var loading: Driver<Bool> { get }

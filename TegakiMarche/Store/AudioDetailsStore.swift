@@ -19,10 +19,19 @@ class AudioDetailsStore: ContentDetailsStore {
         return loadingRelay.asDriver(onErrorJustReturn: false)
     }
     
-    init(viewController: ContentDetailsViewController, viewModel: ContentViewModel<Firebase.Content.Audio>) {
+    init(content: Firebase.Content, viewController: ContentDetailsViewControllerProtocol, viewModel: ContentViewModel<Firebase.Content.Audio>) {
         viewModel.item
             .subscribe(onNext: { (audio) in
-                viewController.contentView.image = UIImage(named: "demo")
+                UIImage.fetchImage(url: content.thumbnailImageURL) { (result) in
+                    switch result {
+                    case .success(let image):
+                        viewController.updateImage(image)
+                    case .failure(let error):
+                        developDebugPrint(error)
+                    }
+                }
+                viewController.insertStackContent(view: ContentDetailsViewBuilder.audio(), at: 0)
+                viewController.insertStackContent(view: DetailTextView.instantiate(with: content.title), at: 1)
             })
             .disposed(by: disposeBag)
     }
