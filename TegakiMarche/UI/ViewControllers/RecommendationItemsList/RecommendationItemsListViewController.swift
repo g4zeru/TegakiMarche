@@ -20,6 +20,7 @@ class RecommendationItemsListViewController: UIViewController, RecommendationIte
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 35, right: 0)
+        layout.minimumLineSpacing = 30
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = UIColor.clear
         view.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -35,7 +36,7 @@ class RecommendationItemsListViewController: UIViewController, RecommendationIte
 
     override func loadView() {
         let backView = UIView(frame: UIScreen.main.bounds)
-        backView.backgroundColor = UIColor.white
+        backView.backgroundColor = UIColor.systemBackground
         self.view = backView
         self.view.addSubview(self.collectionView)
         self.view.addSubview(self.errorView)

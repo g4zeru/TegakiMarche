@@ -100,6 +100,28 @@ extension Reactive where Base: Query {
     }
 }
 
+extension Reactive where Base: DocumentReference {
+    func get<Model: FirestoreDocumentModel>() -> Observable<Model> {
+        return Observable.create { observer in
+            self.base.getDocument { (snapshot, error) in
+                if let error = error {
+                    observer.onError(error)
+                }
+                guard let snapshot = snapshot else {
+                    observer.onError(FirestoreError.unknown)
+                    return
+                }
+                do {
+                    observer.onNext( try snapshot.makeResult(id: snapshot.documentID))
+                } catch {
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+}
+
 enum FirestoreError: Error {
     case unknown
     case notFoundEntity(documentID: String)

@@ -16,7 +16,6 @@ class AudioControlView: UIView, NibInstantiatable {
         volumeSeekSlider.setThumbImage(volumeThumbImg, for: .normal)
         let timeThumbImg = UIColor.white.circleImage(size: CGSize(width: 13, height: 13))
         playTimeSeekSlider.setThumbImage(timeThumbImg, for: .normal)
-        
     }
 }
 
