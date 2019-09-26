@@ -11,7 +11,10 @@ import RxSwift
 struct Firebase {
     static let baseRef = Firestore.firestore().collection("datastore")
     static var standardDatastore: DocumentReference {
-        return baseRef.document("v1")
+        return baseRef.document("mainContainer")
+    }
+    static var contentsDatastore: DocumentReference {
+        return baseRef.document("contentsContainer")
     }
 }
 
@@ -94,6 +97,28 @@ extension Reactive where Base: Query {
         return Observable.create({ _ in
             Disposables.create()
         })
+    }
+}
+
+extension Reactive where Base: DocumentReference {
+    func get<Model: FirestoreDocumentModel>() -> Observable<Model> {
+        return Observable.create { observer in
+            self.base.getDocument { (snapshot, error) in
+                if let error = error {
+                    observer.onError(error)
+                }
+                guard let snapshot = snapshot else {
+                    observer.onError(FirestoreError.unknown)
+                    return
+                }
+                do {
+                    observer.onNext( try snapshot.makeResult(id: snapshot.documentID))
+                } catch {
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
     }
 }
 

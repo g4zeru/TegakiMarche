@@ -11,7 +11,7 @@ import UIKit
 class AdditionalContentPurchaseButtonView: UIView {
     let overlayView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.groupTableViewBackground
+        view.backgroundColor = UIColor.tertiarySystemBackground
         view.layer.masksToBounds = false
         view.layer.cornerRadius = 10
         view.layer.shadowOffset = CGSize(width: 2, height: 3)
